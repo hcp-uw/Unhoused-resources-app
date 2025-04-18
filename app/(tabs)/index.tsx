@@ -22,7 +22,6 @@ export default function Index() {
           <Button label="Medical" theme="primary"/>
           <Button label="Shelter" theme="primary"/>
         </View>
-        <Button label="Submit"/>
         </View>
         <Text style={styles.header}>Weather Alerts</Text>
         <WeatherView />
