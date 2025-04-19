@@ -17,7 +17,7 @@ export default function Index() {
         
         <View
           style={styles.buttonsContainer}>
-          <Button label="Hygiene" theme="primary"/>
+          <Button label="Hygiene" theme="hygieneTheme"/>
           <Button label="Food Banks" theme="primary"/>
           <Button label="Medical" theme="primary"/>
           <Button label="Shelter" theme="primary"/>
