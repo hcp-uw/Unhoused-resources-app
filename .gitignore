@@ -140,3 +140,4 @@ expo-env.d.ts
 
 # ignore 'npx expo start' -> .expo/types/router.d.ts
 .expo/types/router.d.ts
+.watchmanconfig
