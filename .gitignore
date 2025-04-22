@@ -134,10 +134,9 @@ dist
 
 expo-env.d.ts
 # @end expo-cli
-######
+######################
 # Custom Ignores
-
-# ignore 'npx expo start' -> .expo/types/router.d.ts
+######################
 .watchmanconfig
 ios
 ios/Podfile
@@ -152,5 +151,5 @@ android/
 .DS_Store
 .expo/devices.json
 
-
-.expo/types/router.d.ts
+# ignore .expo/ file, usually ignored by default but not this time for some reason
+.expo/
