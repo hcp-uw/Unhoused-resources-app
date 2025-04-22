@@ -1,63 +1,54 @@
-// LEO: my first pull-request
-// RAAHIL: My first commit
-
-// NOTE: This is just a place-holder template to fill out
 # Project Title
-
-Unhoused Resources App
+Unhoused Resources App - Seattle/King County
 
 ## Description
+The Unhoused Resources App aims to help the Unhoused community in the Seattle/King County area
+to find either: 1) Food, 2) Shelter, 3) Medical services, 4) Hygiene services
 
-An in-depth paragraph about your project and overview of use.
+The app uses the user's current location to find the closest locations based on their chosen resource (ex. Shelter)
+It then shows a list of all available chosen resources - naturally ordered by distance - where pressing on a 
+resource shows them summary information such as: Title, Google Reviews, time open, phone number, etc.
+
+Clicking on the "directions" button allows them to go to the "map page" which uses Google maps to direct them
+to their desired location
 
 ## Getting Started
-
-### Dependencies
-
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
-
 ### Installing
+To run the project yourself, one must have installed...
+1. Node.js (LTS v22.13.1 preferred) 
+2. VSCode or preferred code editor/IDE
+3. Expo Go app on a physical IOS or Android device
+(Note: Project development can work on both Mac & Windows laptops)
 
 To download the program
-1. Git clone from: https://github.com/hcp-uw/Unhoused-resources-app/tree/main 
-
-To run the project yourself, one must have installed...
-1. Node.js (LTS v22.13.1) 
-2. VSCode or preferred code editor/IDE
-3. (Optional) Expo Go app on phone
-    1. Why optional? 
-    * Not recommended: One can run the app in a "web based" version after running "npx expo start"
+1. Git clone from: https://github.com/hcp-uw/Unhoused-resources-app/tree/main
+2. cd into "Unhoused-resource-app"
+3. Execute the program!
 
 ### Executing program
-
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
 Once everything is installed properly...
 * git pull (just to make sure)
 * npm install (installs all necessary packages from package.json)
-* npx expo start (follow error fixing instructions if necessary)
+* ```npx expo start``` (follow error fixing instructions if necessary)
+* Scan QR code in terminal on your "Expo Go" app for the app to run!
 
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+## Help / Common issues
+- Remember to cd into "Unhoused-resources-app" on git clone!
+- Remember to run "npm install" if any updates occurred!
 
 ## Authors
-
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+Full-stack (Backend) developer:      Raahil J. - rairai77@uw.edu
+    Contributions: ...
+Frontend developer:                  Celestine B. - celestinembuendia@gmail.com
+    Contributions: ...
+Project Manager:                     Leonardo P. - leitoparal36@gmail.com
+    Contributions: ...
+UI/UX Lead & Frontend developer:     Ian L. - imlimasi@cs.washington.edu
+    Contributions: ...
 
 ## Version History
-
+TODO
+// Possible version history?
 * 0.2
     * Various bug fixes and optimizations
     * See [commit change]() or See [release history]()
@@ -65,14 +56,8 @@ ex. [@DomPizzie](https://twitter.com/dompizzie)
     * Initial Release
 
 ## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+Creative Commons License - From overarching Husky Coding Project
 
 ## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [Readme template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
+* [React Native & Expo Tutorial](https://docs.expo.dev/tutorial/introduction/)
