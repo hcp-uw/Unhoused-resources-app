@@ -1,3 +1,10 @@
 {
-  "urlRandomness": "D7rRXZw"
+  "urlRandomness": "D7rRXZw",
+  "dev": true,
+  "minify": false,
+  "https": false,
+  "scheme": "com.rairai77.UnhousedResourcesProject",
+  "hostType": "lan",
+  "lanType": "ip",
+  "devClient": false
 }

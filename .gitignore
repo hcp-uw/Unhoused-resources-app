@@ -134,10 +134,23 @@ dist
 
 expo-env.d.ts
 # @end expo-cli
-
 ######
 # Custom Ignores
 
 # ignore 'npx expo start' -> .expo/types/router.d.ts
-.expo/types/router.d.ts
 .watchmanconfig
+ios
+ios/Podfile
+ios/Podfile.lock
+ios/Podfile.properties.json
+ios/Pods
+ios/UnhousedResourcesProject
+ios/UnhousedResourcesProject.xcodeproj
+ios/UnhousedResourcesProject.xcworkspace
+ios/build
+android/
+.DS_Store
+.expo/devices.json
+
+
+.expo/types/router.d.ts
