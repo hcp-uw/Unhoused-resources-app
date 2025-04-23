@@ -37,26 +37,17 @@ Once everything is installed properly...
 - Remember to run "npm install" if any updates occurred!
 
 ## Authors
-Full-stack (Backend) developer:      Raahil J. - rairai77@uw.edu
-    Contributions: ...
-Frontend developer:                  Celestine B. - celestinembuendia@gmail.com
-    Contributions: ...
-Project Manager:                     Leonardo P. - leitoparal36@gmail.com
-    Contributions: ...
-UI/UX Lead & Frontend developer:     Ian L. - imlimasi@cs.washington.edu
-    Contributions: ...
-
-## Version History
-TODO
-// Possible version history?
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+*Full-stack (Backend) developer:      Raahil J. - rairai77@uw.edu
+    *Contributions: ...
+*Frontend developer:                  Celestine B. - celestinembuendia@gmail.com
+    *Contributions: ...
+*Project Manager:                     Leonardo P. - leitoparal36@gmail.com
+    *Contributions: ...
+*UI/UX Lead & Frontend developer:     Ian L. - imlimasi@cs.washington.edu
+    *Contributions: ...
 
 ## License
-Creative Commons License - From overarching Husky Coding Project
+Creative Commons License - From the Husky Coding Project
 
 ## Acknowledgments
 * [Readme template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
