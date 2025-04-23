@@ -24,7 +24,7 @@ export default function resource_page() {
   });
 
   return (
-    <View>
+    <View style={{flex: 1, height: 100}}>
       <ScrollView>
       <Text style = {styles.header}>Capitol Hill Community Lunch</Text>
       <View style = {styles.rowContainer}>
@@ -42,9 +42,12 @@ export default function resource_page() {
         </View>
       </ScrollView>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <ResImage uri={require('@/assets/images/FoodBank1.jpeg')}></ResImage>
-      </ScrollView>
+      <View style={{ width: 450, height: 300}}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ResImage uri={require('@/assets/images/FoodBank1.jpeg')}></ResImage>
+        </ScrollView>
+      </View>
+      
 
       <View style={[{marginTop:15}]}>
         <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>509 10th Ave E, Seattle, WA 98102</Text>
