@@ -134,6 +134,9 @@ dist
 
 expo-env.d.ts
 # @end expo-cli
+######################
+# Custom Ignores
+######################
 .watchmanconfig
 ios
 ios/Podfile
@@ -147,3 +150,6 @@ ios/build
 android/
 .DS_Store
 .expo/devices.json
+
+# ignore .expo/ file, usually ignored by default but not this time for some reason
+.expo/
