@@ -1,9 +1,8 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 
-import Button from "@/components/Button";
-
 import colors from "../colors";
 import WeatherView from "@/components/WeatherView";
+import SelectButton from "@/components/SelectButton";
 
 const PlaceholderImage = require("@/assets/images/background-image.png");
 
@@ -17,12 +16,13 @@ export default function Index() {
         
         <View
           style={styles.buttonsContainer}>
-          <Button label="Hygiene" theme="hygieneTheme"/>
-          <Button label="Food Banks" theme="primary"/>
-          <Button label="Medical" theme="primary"/>
-          <Button label="Shelter" theme="primary"/>
+
+          <SelectButton label="Hygiene" source={require('../../assets/images/button_hygiene.png')}/>
+          <SelectButton label="Food Banks" source={require('../../assets/images/button_food.png')}/>
+          <SelectButton label="Medical" source={require('../../assets/images/button_medical.png')}/>
+          <SelectButton label="Shelter" source={require('../../assets/images/button_shelter.png')}/>
+
         </View>
-        <Button label="Submit"/>
         </View>
         <Text style={styles.header}>Weather Alerts</Text>
         <WeatherView />
