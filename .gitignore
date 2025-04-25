@@ -138,6 +138,7 @@ expo-env.d.ts
 ######
 # Custom Ignores
 
-# ignore 'npx expo start' -> .expo/types/router.d.ts
-.expo/types/router.d.ts
+# ignore .expo/ file, usually ignored by default but not this time for some reason
+# NOTE: remember to run 'git rm -r --cached .expo'
+.expo/
 .watchmanconfig
