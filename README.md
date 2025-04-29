@@ -46,7 +46,7 @@ Note: All authors completed the React Native & Expo tutorial during the project!
 * PROJECT MANAGER: **Leonardo P.** - leitoparal36@gmail.com
    * Weekly meetings & documentation | Giving TODOs | Git branch workflow | Minimal coding unification <br>
 * FULL-STACK (BACKEND) DEVELOPER: **Raahil J.** - rairai77@uw.edu
-   * Map Page implementation | Supabase functionality | Proficient at guidance to other members <br>
+   * Map Page implementation w/ Google Maps API | Supabase functionality | Proficient at guidance to other members <br>
 
 * FRONTEND DEVELOPER: **Jong-Hyun** - TodoEmail
    * Helpers Page implementation <br>
