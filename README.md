@@ -39,19 +39,19 @@ Once everything is installed properly...
 ## Authors
 Note: All authors completed the React Native & Expo tutorial during the project!
 
-* Frontend developer & UI/UX:          **Celestine B.** - celestinembuendia@gmail.com
-   * Original Figma design | Home page implementation w/ weather API
-* UI/UX Lead & Frontend developer:     **Ian L.** - imlimasi@cs.washington.edu
-   * Proficient Figma lead designer | List page & Resource page development
-* Project Manager:                     **Leonardo P.** - leitoparal36@gmail.com
-   * Weekly meetings & documentation | Giving TODOs | Git branch workflow | Minimal coding unification
-* Full-stack (Backend) developer:      **Raahil J.** - rairai77@uw.edu
-   * Map Page implementation | Supabase functionality | Proficient at guidance to other members
+* **Celestine B.** ------- FRONTEND DEVELOPER & UI/UX - celestinembuendia@gmail.com
+   * Original Figma design | Home page implementation w/ weather API <br>
+* **Ian L.** ------------- UI/UX Lead & Frontend developer - imlimasi@cs.washington.edu
+   * Proficient Figma lead designer | List page & Resource page development <br>
+* **Leonardo P.** -------- Project Manager - leitoparal36@gmail.com
+   * Weekly meetings & documentation | Giving TODOs | Git branch workflow | Minimal coding unification <br>
+* **Raahil J.** ---------- Full-stack (Backend) developer - rairai77@uw.edu
+   * Map Page implementation | Supabase functionality | Proficient at guidance to other members <br>
 
-* Frontend Developer: **Jong-Hyun** - todo
-   * Helpers Page implementation
-* Frontend Developer: **Thang H.** - thuynh6@uw.edu
-   * tbd
+* **Jong-Hyun** ---------- Frontend Developer - TodoEmail
+   * Helpers Page implementation <br>
+*  **Thang H.** ---------- Frontend Developer - thuynh6@uw.edu
+   * tbd <br>
 
 ## License
 Creative Commons License - From the Husky Coding Project
