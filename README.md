@@ -1,5 +1,4 @@
-# Project Title
-Unhoused Resources App - Seattle/King County
+# Unhoused Resources App - Seattle/King County
 
 ## Description
 The Unhoused Resources App aims to help the Unhoused community in the Seattle/King County area
