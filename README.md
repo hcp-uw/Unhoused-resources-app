@@ -39,11 +39,11 @@ Once everything is installed properly...
 Note: All authors completed the React Native & Expo tutorial during the project!
 
 * FRONTEND DEVELOPER & UI/UX: **Celestine B.** - celestinembuendia@gmail.com
-   * Original Figma design | Home page implementation w/ weather API <br>
+   * Original Figma designer | Home page implementation | Weather Alert API implementation <br>
 * UI/UX LEAD & FRONTEND DEVELOPER: **Ian L.** - imlimasi@cs.washington.edu
-   * Proficient Figma lead designer | List page & Resource page development <br>
+   * Proficient Figma designer and leader | List page implementation | Resource Page implementation <br>
 * PROJECT MANAGER: **Leonardo P.** - leitoparal36@gmail.com
-   * Weekly meetings & documentation | Giving TODOs | Git branch workflow | Minimal coding unification <br>
+   * Weekly meetings, documentation, TODOs | Git branch workflow | Minimal coding unification <br>
 * FULL-STACK (BACKEND) DEVELOPER: **Raahil J.** - rairai77@uw.edu
    * Map Page implementation w/ Google Maps API | Supabase functionality | Proficient at guidance to other members <br>
 
