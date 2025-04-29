@@ -27,8 +27,8 @@ To download the program
 
 ### Executing program
 Once everything is installed properly...
-* git pull (just to make sure)
-* npm install (installs all necessary packages from package.json)
+* ```git pull``` (just to make sure)
+* ```npm install``` (installs all necessary packages from package.json)
 * ```npx expo start``` (follow error fixing instructions if necessary)
 * Scan QR code in terminal on your "Expo Go" app for the app to run!
 
@@ -37,14 +37,21 @@ Once everything is installed properly...
 - Remember to run "npm install" if any updates occurred!
 
 ## Authors
-*Full-stack (Backend) developer:      Raahil J. - rairai77@uw.edu
-    *Contributions: ...
-*Frontend developer:                  Celestine B. - celestinembuendia@gmail.com
-    *Contributions: ...
-*Project Manager:                     Leonardo P. - leitoparal36@gmail.com
-    *Contributions: ...
-*UI/UX Lead & Frontend developer:     Ian L. - imlimasi@cs.washington.edu
-    *Contributions: ...
+Note: All authors completed the React Native & Expo tutorial during the project!
+
+* Frontend developer & UI/UX:          **Celestine B.** - celestinembuendia@gmail.com
+   * Original Figma design | Home page implementation w/ weather API
+* UI/UX Lead & Frontend developer:     **Ian L.** - imlimasi@cs.washington.edu
+   * Proficient Figma lead designer | List page & Resource page development
+* Project Manager:                     **Leonardo P.** - leitoparal36@gmail.com
+   * Weekly meetings & documentation | Giving TODOs | Git branch workflow | Minimal coding unification
+* Full-stack (Backend) developer:      **Raahil J.** - rairai77@uw.edu
+   * Map Page implementation | Supabase functionality | Proficient at guidance to other members
+
+* Frontend Developer: **Jong-Hyun** - todo
+   * Helpers Page implementation
+* Frontend Developer: **Thang H.** - thuynh6@uw.edu
+   * tbd
 
 ## License
 Creative Commons License - From the Husky Coding Project
