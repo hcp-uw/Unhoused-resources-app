@@ -1,6 +1,5 @@
-# Project Title
-Unhoused Resources App - Seattle/King County
-
+# Unhoused Resources App - Seattle/King County
+![HRA Logo](assets/images/HRALogoLeft.png)
 ## Description
 The Unhoused Resources App aims to help the Unhoused community in the Seattle/King County area
 to find either: 1) Food, 2) Shelter, 3) Medical services, 4) Hygiene services
@@ -27,8 +26,8 @@ To download the program
 
 ### Executing program
 Once everything is installed properly...
-* git pull (just to make sure)
-* npm install (installs all necessary packages from package.json)
+* ```git pull``` (just to make sure)
+* ```npm install``` (installs all necessary packages from package.json)
 * ```npx expo start``` (follow error fixing instructions if necessary)
 * Scan QR code in terminal on your "Expo Go" app for the app to run!
 
@@ -37,14 +36,21 @@ Once everything is installed properly...
 - Remember to run "npm install" if any updates occurred!
 
 ## Authors
-*Full-stack (Backend) developer:      Raahil J. - rairai77@uw.edu
-    *Contributions: ...
-*Frontend developer:                  Celestine B. - celestinembuendia@gmail.com
-    *Contributions: ...
-*Project Manager:                     Leonardo P. - leitoparal36@gmail.com
-    *Contributions: ...
-*UI/UX Lead & Frontend developer:     Ian L. - imlimasi@cs.washington.edu
-    *Contributions: ...
+Note: All authors completed the React Native & Expo tutorial during the project!
+
+* FRONTEND DEVELOPER & UI/UX: **Celestine B.** - celestinembuendia@gmail.com
+   * Original Figma designer | Home page implementation | Weather Alert API implementation <br>
+* UI/UX LEAD & FRONTEND DEVELOPER: **Ian L.** - imlimasi@cs.washington.edu
+   * Proficient Figma designer and leader | List page implementation | Resource Page implementation <br>
+* PROJECT MANAGER: **Leonardo P.** - leitoparal36@gmail.com
+   * Weekly meetings, documentation, TODOs | Git branch workflow | Minimal coding unification <br>
+* FULL-STACK (BACKEND) DEVELOPER: **Raahil J.** - rairai77@uw.edu
+   * Map Page implementation w/ Google Maps API | Supabase functionality | Proficient at guidance to other members <br>
+
+* FRONTEND DEVELOPER: **Jong-Hyun** - jonghyunleecs@gmail.com
+   * Helpers Page implementation <br>
+* FRONTEND DEVELOPER : **Thang H.** - thuynh6@uw.edu
+   * tbd <br>
 
 ## License
 Creative Commons License - From the Husky Coding Project
