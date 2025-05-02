@@ -1,5 +1,5 @@
 # Unhoused Resources App - Seattle/King County
-![HRA Logo](assets/images/HRALogoLeft.png)
+![HRA Logo](assets/images/HRALogoLeft.png | width=75)
 ## Description
 The Unhoused Resources App aims to help the Unhoused community in the Seattle/King County area
 to find either: 1) Food, 2) Shelter, 3) Medical services, 4) Hygiene services
