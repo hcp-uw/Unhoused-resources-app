@@ -1,6 +1,7 @@
 import { StyleSheet, View, Pressable, Text, Image, ImageSourcePropType } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import colors from '../app/colors';
+import { router } from 'expo-router';
 
 type Props = {
   label: string;
@@ -8,24 +9,44 @@ type Props = {
 }
 
 export default function SelectButton({ label, source }: Props) {
-    return (
-        <View style={styles.buttonContainer}>
-        <Pressable 
-            style={styles.button} 
-            onPress={() => alert('You pressed a button.')}>
-            <View>
-                <Text style={styles.buttonLabel}>{label}</Text>
-            </View>
-            <View style={styles.buttonImgContainer}>
-                <Image 
-                    source={source}
-                    resizeMode="contain"
-                    style={styles.buttonImg}
-                />
-            </View>
-        </Pressable>
-        </View>
-    );
+  return (
+      <View style={styles.buttonContainer}>
+      <Pressable 
+          style={styles.button} 
+          // router.navigate: If label="Hygiene", passes resoure_label to INDEX/HOMEPAGE in useLocalSearchParams
+          onPress={() => router.navigate(`/list_page?resource_label=${label}`)}>
+          <View>
+              <Text style={styles.buttonLabel}>{label}</Text>
+          </View>
+          <View style={styles.buttonImgContainer}>
+              <Image 
+                  source={source}
+                  resizeMode="contain"
+                  style={styles.buttonImg}
+              />
+          </View>
+      </Pressable>
+      </View>
+  );
+
+  // return (
+  //   <View style={styles.buttonContainer}>
+  //   <Pressable 
+  //       style={styles.button} 
+  //       onPress={() => alert('You pressed a button.')}>
+  //       <View>
+  //           <Text style={styles.buttonLabel}>{label}</Text>
+  //       </View>
+  //       <View style={styles.buttonImgContainer}>
+  //           <Image 
+  //               source={source}
+  //               resizeMode="contain"
+  //               style={styles.buttonImg}
+  //           />
+  //       </View>
+  //   </Pressable>
+  //   </View>
+  // );
 }
 
 const styles = StyleSheet.create({

@@ -15,15 +15,17 @@ export default function test_page() {
     const fetchName = async () => {
       const { data, error } = await supabase
         .from('locations')
-        .select('*')  // Column
+        .select('*')
+        .limit(2)  // Gives 2 columns only
   
       if (error != null) {
         console.error("fetchName error!")
         Alert.alert("WOERIJWER")
         setShelterName('Error: shelterName not retrieved')
       } else {
-        setShelterName(JSON.stringify(data))
-        console.log("SHELTER ROW : " + shelterName)
+        setShelterName(data[0].title);
+        console.log("2 SHELTER ROWS : ", JSON.stringify(data))
+        console.log("SHELTER NAME: ", shelterName)
       }
     }
 
