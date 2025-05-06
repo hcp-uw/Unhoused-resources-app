@@ -13,6 +13,8 @@ export default function test_page() {
 
   useEffect(() => {
     const fetchName = async () => {
+      // ! 'data' from supabase DB is of type any[]!
+      // ! Need to use complex new component Resource.ts!
       const { data, error } = await supabase
         .from('locations')
         .select('*')
