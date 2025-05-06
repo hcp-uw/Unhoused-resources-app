@@ -76,6 +76,7 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+          // + '76933' );
           + location.coords.latitude + ','
           + location.coords.longitude );
       const json = await response.json();
@@ -91,6 +92,7 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+          // + '76933' );
           + location.coords.latitude + ','
           + location.coords.longitude );
       const json = await response.json();
@@ -136,7 +138,6 @@ export default function WeatherView() {
       )}
       <View style={styles.alertsContainer}>
         {alerts
-          .filter(item => (item.msgtype === 'Alert'))
           .filter((item, index, self) => index === self.findIndex(a => a.headline === item.headline))
           .map(item => (
             <AlertItem alert={item}/>
@@ -152,9 +153,29 @@ type AlertProps = {
 
 function AlertItem({ alert }: AlertProps) {
   return (
-    <View style={styles.alert}>
-      <Foundation name="alert" style={styles.alertIcon}/>
-      <Text style={styles.alertText}>{alert.headline}</Text>
+    <View style={styles.alertContainer}>
+      <View style={styles.alertHeader}>
+        <Foundation name="alert" style={styles.alertIcon}/>
+        <Text style={styles.alertText}>Weather {alert.msgtype}</Text>
+      </View>
+      <View style={styles.alertContent}>
+        <View style={styles.alertContentHeader}>
+          <Text style={styles.alertText}>{alert.headline}</Text>
+          <View style={styles.alertInfo}>
+            <Text style={styles.alertText}><MaterialCommunityIcons name="weather-cloudy-alert"/>  {alert.severity} </Text>
+            <Text style={styles.alertText}><MaterialCommunityIcons name="timer-sand-complete"/>  {alert.urgency} </Text>
+          </View>
+        </View>
+        {alert.instruction ? (
+          <View style={styles.alertInstruction}>
+            <Text style={styles.alertText}>Instructions:</Text>
+            <Text style={styles.alertText}>{alert.instruction.replace(/\s+/g, ' ').trim()}</Text>
+          </View>
+        ):(
+          <View></View>
+        )}
+      </View>
+      {/* <Text>{alert.desc}</Text> */}
     </View>
   )
 }
@@ -254,6 +275,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 25,
     paddingBottom: 25,
+    alignItems: 'center'
   },
   headerText: {
     color: 'white',
@@ -261,26 +283,60 @@ const styles = StyleSheet.create({
   alertsContainer: {
     margin: 5,
   },
-  alert: {
+  alertContainer: {
     backgroundColor: '#4F5D6C',
-    alignItems: 'center',
     borderRadius: 10,
-    padding: 10,
     marginTop: 10,
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '90%',
     alignSelf: 'center'
+  },
+  alertHeader: {
+    flexDirection: 'row',
+    backgroundColor: 'gray',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    paddingLeft: 10,
+    padding: 3,
+    alignItems: 'center',
+  },
+  alertContent: {
+    padding: 10,
+  },
+  alertContentHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: '10%',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+  },
+  alertInfo: {
+    backgroundColor: 'gray',
+    padding: 10,
+    borderRadius: 5,
+    minHeight: '70%',
+    justifyContent: 'space-around'
+  },
+  alertInstruction: {
+    color: 'white',
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 10
+  },
+  alertExpand: {
+
   },
   alertText: {
     color: 'white',
   },
   alertIcon: {
     color: 'white',
-    fontSize: 20,
-    marginRight: 10,
+    fontSize: 18,
+    marginRight: 8,
   },
   iconContainer: {
     alignItems: 'center',
+    maxWidth: '40%'
   },
   icon: {
     width: 64,
@@ -289,7 +345,9 @@ const styles = StyleSheet.create({
   },
   iconLabel: {
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center',
+    maxWidth: 128
   },
   weatherInfo: {
     alignItems: 'flex-end'
