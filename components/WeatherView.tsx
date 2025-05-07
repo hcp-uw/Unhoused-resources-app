@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import * as Location from 'expo-location';
 import { Image, Pressable, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
-import { Feather } from '@expo/vector-icons'
+import { Feather, MaterialIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Foundation } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import colors from "@/app/colors";
+import AlertItem from "./WeatherAlert";
 
-type Alert = {
+export type Alert = {
   headline: string;
   msgtype: string;
   severity: string;
@@ -76,7 +77,7 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
-          // + '76933' );
+          // + '71282' );  // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
       const json = await response.json();
@@ -92,7 +93,7 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
-          // + '76933' );
+          // + '71282' ); // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
       const json = await response.json();
@@ -125,14 +126,14 @@ export default function WeatherView() {
                 thumbColor='#f3f3f3'
                 ios_backgroundColor='#A9A9A9'
                 onValueChange={toggleSwitch}
-                value={isAmer}
+                value={!isAmer}
               />
               <Text style={styles.switchLabel}>°C</Text>
             </View>
           </View>
           <View style={styles.weatherContent}>
             <WeatherIcon iconPath={weather?.condition.icon} altText={weather?.condition.text} />
-            <WeatherInfo isAmer={!isAmer} weather={weather} />
+            <WeatherInfo isAmer={isAmer} weather={weather} />
           </View>
         </View>
       )}
@@ -145,39 +146,6 @@ export default function WeatherView() {
       </View>
     </View>
   );
-}
-
-type AlertProps = {
-  alert: Alert;
-};
-
-function AlertItem({ alert }: AlertProps) {
-  return (
-    <View style={styles.alertContainer}>
-      <View style={styles.alertHeader}>
-        <Foundation name="alert" style={styles.alertIcon}/>
-        <Text style={styles.alertText}>Weather {alert.msgtype}</Text>
-      </View>
-      <View style={styles.alertContent}>
-        <View style={styles.alertContentHeader}>
-          <Text style={styles.alertText}>{alert.headline}</Text>
-          <View style={styles.alertInfo}>
-            <Text style={styles.alertText}><MaterialCommunityIcons name="weather-cloudy-alert"/>  {alert.severity} </Text>
-            <Text style={styles.alertText}><MaterialCommunityIcons name="timer-sand-complete"/>  {alert.urgency} </Text>
-          </View>
-        </View>
-        {alert.instruction ? (
-          <View style={styles.alertInstruction}>
-            <Text style={styles.alertText}>Instructions:</Text>
-            <Text style={styles.alertText}>{alert.instruction.replace(/\s+/g, ' ').trim()}</Text>
-          </View>
-        ):(
-          <View></View>
-        )}
-      </View>
-      {/* <Text>{alert.desc}</Text> */}
-    </View>
-  )
 }
 
 type WeatherIconProps = {
@@ -282,57 +250,6 @@ const styles = StyleSheet.create({
   },
   alertsContainer: {
     margin: 5,
-  },
-  alertContainer: {
-    backgroundColor: '#4F5D6C',
-    borderRadius: 10,
-    marginTop: 10,
-    flexDirection: 'column',
-    width: '90%',
-    alignSelf: 'center'
-  },
-  alertHeader: {
-    flexDirection: 'row',
-    backgroundColor: 'gray',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    paddingLeft: 10,
-    padding: 3,
-    alignItems: 'center',
-  },
-  alertContent: {
-    padding: 10,
-  },
-  alertContentHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: '10%',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-  alertInfo: {
-    backgroundColor: 'gray',
-    padding: 10,
-    borderRadius: 5,
-    minHeight: '70%',
-    justifyContent: 'space-around'
-  },
-  alertInstruction: {
-    color: 'white',
-    flexDirection: 'row',
-    gap: 10,
-    marginTop: 10
-  },
-  alertExpand: {
-
-  },
-  alertText: {
-    color: 'white',
-  },
-  alertIcon: {
-    color: 'white',
-    fontSize: 18,
-    marginRight: 8,
   },
   iconContainer: {
     alignItems: 'center',
