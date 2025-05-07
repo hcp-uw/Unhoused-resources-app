@@ -57,6 +57,9 @@ export default {
       router: {
         origin: false,
       },
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+      TEST_ENV: process.env.TEST_ENV,
     },
   },
 };

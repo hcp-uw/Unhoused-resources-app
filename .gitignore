@@ -134,9 +134,7 @@ dist
 
 expo-env.d.ts
 # @end expo-cli
-######################
 # Custom Ignores
-######################
 .watchmanconfig
 ios
 ios/Podfile
