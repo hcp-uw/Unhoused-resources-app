@@ -14,6 +14,9 @@ export default {
       supportsTablet: true,
       bundleIdentifier: "com.unhousedresourcesproject",
       infoPlist: {
+        NSLocationWhenInUseUsageDescription: "This app needs access to your location to show nearby places.",
+        NSLocationAlwaysAndWhenInUseUsageDescription: "This app needs access to your location in the background for navigation features.",
+        NSLocationAlwaysUsageDescription: "This app needs access to your location in the background for navigation features.",
         ITSAppUsesNonExemptEncryption: false,
       },
       config: {
