@@ -8,7 +8,6 @@ import Constants from 'expo-constants'  // process.env STOPS WORKING w/ external
 import { Alert } from 'react-native';
 
 import { ResourceRow, returnValidatedResourceRow, returnValidatedResourceRowArr } from "@/components/ResourceRow";
-import ResourceContext from "@/utils/ResourceContext";
 
 export default function test_page() {
   // Consts
@@ -35,7 +34,7 @@ export default function test_page() {
         const rrArr: ResourceRow[] | undefined = returnValidatedResourceRowArr(data);
 
         setResourceRows(rrArr);  // State update schedule here!
-        console.log("JSON.stringified supabase.data : ", JSON.stringify(data))
+        // console.log("JSON.stringified supabase.data : ", JSON.stringify(data))
       } else {
         Alert.alert("ERROR: unknown error for data")
       }

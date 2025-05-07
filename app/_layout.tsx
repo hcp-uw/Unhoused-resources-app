@@ -4,12 +4,12 @@ import { ResourceProvider } from "../utils/ResourceContext"
 
 export default function RootLayout() {
   return (
-    <Stack>
-      {/* (tabs) dir: special directory -> display routes in bottom tab bar */}
-      <ResourceProvider>
+    <ResourceProvider>
+      <Stack>
+        {/* (tabs) dir: special directory -> display routes in bottom tab bar */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </ResourceProvider>
-      <Stack.Screen name="+not-found" />
-    </Stack>
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </ResourceProvider>
   );
 }

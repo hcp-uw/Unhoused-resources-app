@@ -64,3 +64,17 @@ export function returnValidatedResourceRowArr(data: any[]): undefined | Resource
   // INVARIANT: ALl resource rows are valid, return ResourceRow[]
   return rrArr;
 }
+
+export function resourceRowToString(rr: ResourceRow) : string {
+  return `
+    Title: ${rr.title}
+    Description: ${rr.description}
+    Rating: ${rr.rating}
+    Location: (${rr.lat}, ${rr.long})
+    Maps: ${rr.maps_url}
+    Website: ${rr.website}
+    Phone: ${rr.phone}
+    Type ID: ${rr.resource_type_id}
+    Last Updated: ${rr.updated_at}
+  `.trim();
+}

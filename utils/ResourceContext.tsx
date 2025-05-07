@@ -51,12 +51,12 @@ const ResourceProvider = ({ children }: Props) => {
   )
 }
 
-const useResourceData = () => {
+const useResourceData = (): ResourceRow[] | undefined  => {
   const sharedValueContext = useContext(ResourceContext);
   if (!sharedValueContext) {
     console.error("ERROR: useResourceData MUST be used within a provider")
   }
-  return sharedValueContext;
+  return sharedValueContext?.resourceRows;
 }
 
-export default { ResourceProvider, useResourceData };
+export { ResourceProvider, useResourceData };
