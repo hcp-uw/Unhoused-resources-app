@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import * as Location from 'expo-location';
 import { Image, Pressable, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
-import { Feather } from '@expo/vector-icons'
+import { Feather, MaterialIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Foundation } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import colors from "@/app/colors";
+import AlertItem from "./WeatherAlert";
 
-type Alert = {
+export type Alert = {
   headline: string;
   msgtype: string;
   severity: string;
@@ -76,6 +77,7 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+          // + '71282' );  // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
       const json = await response.json();
@@ -91,6 +93,7 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+          // + '71282' ); // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
       const json = await response.json();
@@ -123,20 +126,19 @@ export default function WeatherView() {
                 thumbColor='#f3f3f3'
                 ios_backgroundColor='#A9A9A9'
                 onValueChange={toggleSwitch}
-                value={isAmer}
+                value={!isAmer}
               />
               <Text style={styles.switchLabel}>°C</Text>
             </View>
           </View>
           <View style={styles.weatherContent}>
             <WeatherIcon iconPath={weather?.condition.icon} altText={weather?.condition.text} />
-            <WeatherInfo isAmer={!isAmer} weather={weather} />
+            <WeatherInfo isAmer={isAmer} weather={weather} />
           </View>
         </View>
       )}
       <View style={styles.alertsContainer}>
         {alerts
-          .filter(item => (item.msgtype === 'Alert'))
           .filter((item, index, self) => index === self.findIndex(a => a.headline === item.headline))
           .map(item => (
             <AlertItem alert={item}/>
@@ -144,19 +146,6 @@ export default function WeatherView() {
       </View>
     </View>
   );
-}
-
-type AlertProps = {
-  alert: Alert;
-};
-
-function AlertItem({ alert }: AlertProps) {
-  return (
-    <View style={styles.alert}>
-      <Foundation name="alert" style={styles.alertIcon}/>
-      <Text style={styles.alertText}>{alert.headline}</Text>
-    </View>
-  )
 }
 
 type WeatherIconProps = {
@@ -254,6 +243,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 25,
     paddingBottom: 25,
+    alignItems: 'center'
   },
   headerText: {
     color: 'white',
@@ -261,26 +251,9 @@ const styles = StyleSheet.create({
   alertsContainer: {
     margin: 5,
   },
-  alert: {
-    backgroundColor: '#4F5D6C',
-    alignItems: 'center',
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 10,
-    flexDirection: 'row',
-    width: '90%',
-    alignSelf: 'center'
-  },
-  alertText: {
-    color: 'white',
-  },
-  alertIcon: {
-    color: 'white',
-    fontSize: 20,
-    marginRight: 10,
-  },
   iconContainer: {
     alignItems: 'center',
+    maxWidth: '40%'
   },
   icon: {
     width: 64,
@@ -289,7 +262,9 @@ const styles = StyleSheet.create({
   },
   iconLabel: {
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center',
+    maxWidth: 128
   },
   weatherInfo: {
     alignItems: 'flex-end'
