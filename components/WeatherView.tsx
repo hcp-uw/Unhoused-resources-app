@@ -80,7 +80,7 @@ export default function WeatherView() {
       return;
     }
     try {
-      const response = await fetch('http://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+      const response = await fetch('https://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
           // + '71282' );  // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
@@ -96,7 +96,7 @@ export default function WeatherView() {
       return;
     }
     try {
-      const response = await fetch('http://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+      const response = await fetch('https://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
           // + '71282' ); // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
