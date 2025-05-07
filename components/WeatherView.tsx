@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import * as Location from 'expo-location';
 import { Image, Pressable, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import { Feather, MaterialIcons } from '@expo/vector-icons'
@@ -8,6 +9,7 @@ import { Foundation } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import colors from "@/app/colors";
 import AlertItem from "./WeatherAlert";
+
 
 export type Alert = {
   headline: string;
@@ -22,54 +24,56 @@ export type Alert = {
 }
 
 type Weather = {
-  temp_c: number;
-  temp_f: number;
-  is_day: boolean;
-  condition: {
-    text: string;
-    icon: string;
-  };
-  wind_mph: number;
-  wind_kph: number;
-  wind_dir: string;
-  precip_mm: number;
-  precip_in: number;
-  uv: number;
-}
+    temp_c: number;
+    temp_f: number;
+    is_day: boolean;
+    condition: {
+        text: string;
+        icon: string;
+    };
+    wind_mph: number;
+    wind_kph: number;
+    wind_dir: string;
+    precip_mm: number;
+    precip_in: number;
+    uv: number;
+};
 
 export default function WeatherView() {
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [alerts, setAlerts] = useState<Alert[]>([]);
-  const [weather, setWeather] = useState<Weather | null>(null);
-  const [isAmer, setIsAmer] = useState<boolean>(true);
-  const [refresh, setRefresh] = useState<boolean>(false);
+    const [location, setLocation] = useState<Location.LocationObject | null>(
+        null
+    );
+    const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [weather, setWeather] = useState<Weather | null>(null);
+    const [isAmer, setIsAmer] = useState<boolean>(true);
+    const [refresh, setRefresh] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("getting location");
-    getCurrentLocationAysnc();
-  }, [refresh]);
+    useEffect(() => {
+        console.log("getting location");
+        getCurrentLocationAysnc();
+    }, [refresh]);
 
-  useEffect(() => {
-    console.log("getting weather");
-    if (location) {
-      getWeatherAsync();
-      getWeatherAlertsAsync();
-    }
-  }, [location, refresh]);
+    useEffect(() => {
+        console.log("getting weather");
+        if (location) {
+            getWeatherAsync();
+            getWeatherAlertsAsync();
+        }
+    }, [location, refresh]);
 
-  const toggleSwitch = () => setIsAmer(previousState => !previousState);
+    const toggleSwitch = () => setIsAmer((previousState) => !previousState);
 
-  const getCurrentLocationAysnc = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.log("location permissions failed");
-      return;
-    }
+    const getCurrentLocationAysnc = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+            console.log("location permissions failed");
+            return;
+        }
 
-    let location = await Location.getCurrentPositionAsync({});
-    setLocation(location);
-    console.log("location set as " + location.coords.latitude);
-  }
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        console.log("location set as " + location.coords.latitude);
+    };
 
   const getWeatherAlertsAsync = async () => {
     if (location === null) {
@@ -149,47 +153,56 @@ export default function WeatherView() {
 }
 
 type WeatherIconProps = {
-  iconPath: string;
-  altText: string;
+    iconPath: string;
+    altText: string;
 };
 
 function WeatherIcon({ iconPath, altText }: WeatherIconProps) {
-  const iconUrl = `https:${iconPath}`;
+    const iconUrl = `https:${iconPath}`;
 
-  return (
-    <View style={styles.iconContainer}>
-      <Image
-        source={{uri: iconUrl}}
-        style={styles.icon}
-      />
-      <Text style={styles.iconLabel}>{altText}</Text>
-    </View>
-  )
+    return (
+        <View style={styles.iconContainer}>
+            <Image source={{ uri: iconUrl }} style={styles.icon} />
+            <Text style={styles.iconLabel}>{altText}</Text>
+        </View>
+    );
 }
 
 type WeatherInfoProps = {
-  isAmer: boolean;
-  weather: Weather;
+    isAmer: boolean;
+    weather: Weather;
 };
 
 function WeatherInfo({ isAmer, weather }: WeatherInfoProps) {
-  return (
-    isAmer ? (
-      <View style={styles.weatherInfo}>
-        <Text style={styles.infoTemp}>{weather.temp_f} °F</Text>
-        <Text style={styles.infoSmall}>{weather.wind_mph} mph  <Feather name="wind" /></Text>
-        <Text style={styles.infoSmall}>{weather.precip_in} in  <Ionicons name="rainy" /></Text>
-        <Text style={styles.infoSmall}>{weather.uv} UV  <MaterialCommunityIcons name="sun-wireless-outline" /></Text>
-      </View>
+    return isAmer ? (
+        <View style={styles.weatherInfo}>
+            <Text style={styles.infoTemp}>{weather.temp_f} °F</Text>
+            <Text style={styles.infoSmall}>
+                {weather.wind_mph} mph <Feather name="wind" />
+            </Text>
+            <Text style={styles.infoSmall}>
+                {weather.precip_in} in <Ionicons name="rainy" />
+            </Text>
+            <Text style={styles.infoSmall}>
+                {weather.uv} UV{" "}
+                <MaterialCommunityIcons name="sun-wireless-outline" />
+            </Text>
+        </View>
     ) : (
-      <View style={styles.weatherInfo}>
-        <Text style={styles.infoTemp}>{weather.temp_c} °C</Text>
-        <Text style={styles.infoSmall}>{weather.wind_kph} kph  <Feather name="wind" /></Text>
-        <Text style={styles.infoSmall}>{weather.precip_mm} mm  <Ionicons name="rainy" /></Text>
-        <Text style={styles.infoSmall}>{weather.uv} UV  <MaterialCommunityIcons name="sun-wireless-outline" /></Text>
-      </View>
-    )
-  )
+        <View style={styles.weatherInfo}>
+            <Text style={styles.infoTemp}>{weather.temp_c} °C</Text>
+            <Text style={styles.infoSmall}>
+                {weather.wind_kph} kph <Feather name="wind" />
+            </Text>
+            <Text style={styles.infoSmall}>
+                {weather.precip_mm} mm <Ionicons name="rainy" />
+            </Text>
+            <Text style={styles.infoSmall}>
+                {weather.uv} UV{" "}
+                <MaterialCommunityIcons name="sun-wireless-outline" />
+            </Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
