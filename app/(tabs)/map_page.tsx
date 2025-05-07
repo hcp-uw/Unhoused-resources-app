@@ -2,67 +2,77 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ActivityIndicator, Alert } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, Region } from "react-native-maps";
 import * as Location from "expo-location";
+import { useResourceData } from "@/utils/ResourceContext";
 
 export default function App() {
-  const [region, setRegion] = useState<Region | null>(null);
-  const [loading, setLoading] = useState(true);
+    const [region, setRegion] = useState<Region | null>(null);
+    const [loading, setLoading] = useState(true);
+    const resourceRows = useResourceData();
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.alert(
-          "Permission Denied",
-          "Enable location services to use this feature."
-        );
-        setLoading(false);
-        return;
-      }
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== "granted") {
+                Alert.alert(
+                    "Permission Denied",
+                    "Enable location services to use this feature."
+                );
+                setLoading(false);
+                return;
+            }
 
-      let userLocation = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = userLocation.coords;
+            let userLocation = await Location.getCurrentPositionAsync({});
+            const { latitude, longitude } = userLocation.coords;
 
-      setRegion({
-        latitude,
-        longitude,
-        latitudeDelta: 0.01, // Zoom level
-        longitudeDelta: 0.01,
-      });
+            setRegion({
+                latitude,
+                longitude,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+            });
 
-      setLoading(false);
-    })();
-  }, []);
+            setLoading(false);
+        })();
+    }, []);
 
-  if (loading) {
-    return <ActivityIndicator size="large" style={styles.loader} />;
-  }
+    if (loading || !region) {
+        return <ActivityIndicator size="large" style={styles.loader} />;
+    }
 
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        provider={PROVIDER_GOOGLE}
-        region={region || undefined} // Ensure it starts in the right place
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-      >
-        {region && <Marker coordinate={region} title="You are here" />}
-      </MapView>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <MapView
+                style={styles.map}
+                provider={PROVIDER_GOOGLE}
+                region={region}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
+            >
+                <Marker coordinate={region} title="You are here" />
+                {resourceRows?.map((row) => (
+                    <Marker
+                        key={row.id}
+                        coordinate={{ latitude: row.lat, longitude: row.long }}
+                        title={row.title}
+                        description={row.description}
+                    />
+                ))}
+            </MapView>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-  loader: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+    container: {
+        flex: 1,
+    },
+    map: {
+        width: "100%",
+        height: "100%",
+    },
+    loader: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
 });
