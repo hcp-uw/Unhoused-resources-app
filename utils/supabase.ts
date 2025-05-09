@@ -1,6 +1,7 @@
 // Unknown purpose imports
 import 'react-native-url-polyfill/auto';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// No AsyncStorage for now, fix if needed in future
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { createClient } from '@supabase/supabase-js'
 import Constants from 'expo-constants';
@@ -22,7 +23,6 @@ if (supabaseUrl == undefined || supabaseAnonKey == undefined) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage: AsyncStorage,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
