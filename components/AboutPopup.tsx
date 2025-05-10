@@ -1,12 +1,13 @@
 import colors from "@/app/colors";
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ImageSourcePropType, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import PersonBox from "./AboutPerson";
 
-type Props = {
+type AboutProps = {
   isVisible: boolean;
   onClose: () => void;
 }
 
-export default function AboutPopup({ isVisible, onClose }: Props) {
+export default function AboutPopup({ isVisible, onClose }: AboutProps) {
   return (
     <View style={styles.overlay}>
       <Modal
@@ -18,33 +19,37 @@ export default function AboutPopup({ isVisible, onClose }: Props) {
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.aboutContainer}>
               <Pressable onPress={onClose}><Text style={styles.exit}>X</Text></Pressable>
-              <Text>This is a people</Text>
-              <View style={styles.personBox}>Person 1</View>
-              <View style={styles.personBox}>Person 2</View>
-              <View style={styles.personBox}>Person 3</View>
-              <View style={styles.personBox}>Person 4</View>
-              <View style={styles.personBox}>Person 5</View>
-              <View style={styles.personBox}>Person 6</View>
+              <PersonBox 
+                imgSource={require('../assets/images/leo_bio.png')}
+                name="Leonardo Paredes"
+                tagline="Computer Science at UW"
+                isLeader={true}
+                why="I wanted to create a project with like-minded people. I am passionate about this project and wanted to refine and use my skills to build it!"
+                role="Project Manager"
+                roleDesc={
+                  <View>
+                    <Text>• I managed the project structure with todos & tasks</Text>
+                    <Text>• I worked in a bit of the frontend</Text>
+                    <Text>• Backend... (TODO)</Text>
+                  </View>
+                }
+                hobbies="I like running, piano, video games, language-learning"
+                moreHobbies="Age of Empires, God of War, Invincible, TERRARIA"
+                funFact="I can possibly act well"
+              />
             </View>
           </ScrollView>
         </View>
       </Modal>
     </View>
-    );
+  );
 }
 
 const styles = StyleSheet.create({
-  personBox: {
-    flexDirection: 'column',
-    backgroundColor: colors.brown,
-    color: 'white',
-    borderRadius: 3,
-    padding: 10,
-  },
   aboutContainer: {
-    width: '80%',
+    width: '85%',
     backgroundColor: colors.lightGray,
-    padding: 20,
+    padding: '5%',
     borderRadius: 5,
     flexDirection: 'column',
     gap: 20,
