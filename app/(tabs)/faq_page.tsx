@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
 import colors from "../colors";
 import Button from "@/components/Button";
-import AboutButton from "@/components/AboutButton";
+import BasicButton from "@/components/BasicButton";
 import AboutPopup from "@/components/AboutPopup";
 import { useState } from "react";
 
@@ -12,7 +12,7 @@ export default function AboutScreen() {
     <View style={styles.container}>
       <Text style={styles.text}>faq_page</Text>
       <AboutPopup isVisible={isAboutVisible} onClose={() => setIsAboutVisible(false)}/>
-      <AboutButton onPress={() => setIsAboutVisible(true)}/>
+      <BasicButton label="Misson / About Us" onPress={() => setIsAboutVisible(true)}/>
     </View>
   );
 }
