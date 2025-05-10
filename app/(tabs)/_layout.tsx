@@ -49,6 +49,12 @@ export default function TabLayout() {
           <FontAwesome5 name="hands-helping" size={24} color={color} />       
         ),
       }} />
+      <Tabs.Screen name="settings_page" options={{ 
+        title: 'Settings',
+        tabBarIcon: ({ color, focused }) => (
+          <FontAwesome5 name="cog" size={24} color={color} />       
+        ),
+      }} />
       
     </Tabs>
   );
