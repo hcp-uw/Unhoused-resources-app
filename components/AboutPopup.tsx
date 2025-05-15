@@ -27,10 +27,10 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                 why="I wanted to create a project with like-minded people. I am passionate about this project and wanted to refine and use my skills to build it!"
                 role="Project Manager"
                 roleDesc={
-                  <View>
-                    <Text>• I managed the project structure with todos & tasks</Text>
-                    <Text>• I worked in a bit of the frontend</Text>
-                    <Text>• Backend... (TODO)</Text>
+                  <View style={{marginTop: 10}}>
+                    <Text style={{color: colors.lightGray}}>• I managed the project structure with todos & tasks</Text>
+                    <Text style={{color: colors.lightGray}}>• I worked in a bit of the frontend</Text>
+                    <Text style={{color: colors.lightGray}}>• Backend... (TODO)</Text>
                   </View>
                 }
                 hobbies="I like running, piano, video games, language-learning"
