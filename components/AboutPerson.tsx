@@ -18,44 +18,46 @@ export default function PersonBox(props: PersonBoxProps) {
   return (
     <View style={styles.personBox}>
       <View style={styles.personHeader}>
-        <Image source={props.imgSource} style={styles.img}/>
+        <Image source={props.imgSource} style={styles.img} resizeMode="contain"/>
         <View style={styles.personInfo}>
           <Text style={styles.name}>{props.name}</Text>
           <Text style={styles.tagline}>{props.tagline}</Text>
         </View>
       </View>
-      <View>
-        {props.isLeader ? (
-          <Text style={styles.question}>Why did you decide to make the team?</Text>
-        ):(
-          <Text style={styles.question}>Why did you decide to join the team?</Text>
-        )}
-        <Text style={styles.answer}>{props.why}</Text>
-      </View>
-      <View>
-        <Text style={styles.question}>What did you do for this project?</Text>
-        <View style={styles.pair}>
-          <Text style={styles.leadin}>My role was:</Text>
-          <Text style={styles.fillin}>{props.role}</Text>
+      <View style={styles.personContent}>
+        <View>
+          {props.isLeader ? (
+            <Text style={styles.question}>Why did you decide to make the team?</Text>
+          ):(
+            <Text style={styles.question}>Why did you decide to join the team?</Text>
+          )}
+          <Text style={styles.answer}>{props.why}</Text>
         </View>
-        {props.roleDesc}
-      </View>
-      <View style={styles.otherInfo}>
-        <View style={styles.pair}>
-          <Text style={styles.leadin}>Hobbies:</Text>
-          <Text style={styles.fillin}>{props.hobbies}</Text>
-        </View>
-        {props.moreHobbies? (
+        <View>
+          <Text style={styles.question}>What did you do for this project?</Text>
           <View style={styles.pair}>
-            <Text style={styles.leadin}>Hobbies++:</Text>
-            <Text style={styles.fillin}>{props.moreHobbies}</Text>
+            <Text style={styles.leadin}>My role was:</Text>
+            <Text style={styles.fillin}>{props.role}</Text>
           </View>
-        ) : (
-          <></>
-        )}
-        <View style={styles.pair}>
-          <Text style={styles.leadin}>Fun Fact:</Text>
-          <Text style={styles.fillin}>{props.funFact}</Text>
+          {props.roleDesc}
+        </View>
+        <View style={styles.otherInfo}>
+          <View style={styles.pair}>
+            <Text style={styles.leadin}>Hobbies:</Text>
+            <Text style={styles.fillin}>{props.hobbies}</Text>
+          </View>
+          {props.moreHobbies? (
+            <View style={styles.pair}>
+              <Text style={styles.leadin}>Hobbies++:</Text>
+              <Text style={styles.fillin}>{props.moreHobbies}</Text>
+            </View>
+          ) : (
+            <></>
+          )}
+          <View style={styles.pair}>
+            <Text style={styles.leadin}>Fun Fact:</Text>
+            <Text style={styles.fillin}>{props.funFact}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -68,22 +70,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.brown,
     borderRadius: 5,
     padding: 20,
-    gap: 20
   },
   personHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
-    padding: 8,
+    padding: 10,
+    marginBottom: 15,
+  },
+  personContent: {
+    gap: 25,
   },
   img: {
+    maxWidth: '50%',
     aspectRatio: 1,
-    width: '50%',
     height: '100%',
-    resizeMode: 'contain',
     borderRadius: 5,
-    borderWidth: 2,
-    borderColor: colors.lightGray
+    borderWidth: 3,
+    borderColor: colors.lightGray,
+    backgroundColor: colors.lightGray
   },
   personInfo: {
     flex: 1,
