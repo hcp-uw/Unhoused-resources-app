@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: colors.navyBlue,
-    margin: 10
+    alignSelf: 'center'
   },
   buttonLabel: {
     color: 'white',

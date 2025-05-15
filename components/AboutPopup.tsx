@@ -1,6 +1,8 @@
 import colors from "@/app/colors";
 import { Image, ImageSourcePropType, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import PersonBox from "./AboutPerson";
+import BasicButton from "./BasicButton";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 type AboutProps = {
   isVisible: boolean;
@@ -18,7 +20,7 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
         <View style={styles.overlay}>
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.aboutContainer}>
-              <Pressable onPress={onClose}><Text style={styles.exit}>X</Text></Pressable>
+              <Pressable onPress={onClose}><AntDesign name="close" size={24} color={colors.brown} style={{textAlign: 'right'}} /></Pressable>
               <Text style={styles.header}>Our Team</Text>
               <PersonBox 
                 imgSource={require('../assets/images/bio_leo.png')}
@@ -106,6 +108,7 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                 hobbies="Selfies, Content Creation, App Dev, Gaming"
                 funFact="I was born on International Women’s Day"
               />
+              <BasicButton label="Close" onPress={onClose}/>
             </View>
           </ScrollView>
         </View>
@@ -127,10 +130,6 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  exit: {
-    fontWeight: '600',
-    textAlign: 'right'
   },
   header: {
     color: colors.brown,
