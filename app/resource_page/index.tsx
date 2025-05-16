@@ -12,6 +12,14 @@ import ReviewBar from '@/components/ReviewBar';
 import ReviewStars from '@/components/ReviewStars';
 import ReviewBox from '@/components/ReviewBox';
 
+import { useLocalSearchParams } from 'expo-router';  // For SelectButton resource_label
+import { useResourceData } from '../../utils/ResourceContext'
+import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+
+const resourceRows : ResourceRow[] | undefined = useResourceData();
+const row = (resourceRows) ? resourceRows[0] : null;
+
+const title = row?.title;
 export default function resource_page() {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
@@ -26,10 +34,10 @@ export default function resource_page() {
   return (
     <View style={{flex: 1, height: 100}}>
       <ScrollView>
-      <Text style = {styles.header}>Capitol Hill Community Lunch</Text>
+      <Text style = {styles.header}>{title}</Text>
       <View style = {styles.rowContainer}>
-        <Text style = {[styles.body, {width:30}]}>4,4</Text>
-        <ReviewStars s={18}/>
+        <Text style = {[styles.body, {width:30}]}>{row?.rating}</Text>
+        <ReviewStars s={18} num={4}/>
       </View>
       <Text style = {[styles.body, {fontStyle:'italic'}]}>10:00 AM - 3:00 PM</Text>
 
@@ -62,7 +70,7 @@ export default function resource_page() {
           <Text style = {[styles.header, {fontSize:27}, {marginTop:0}, {width:40}]}>4,4</Text>
 
           <View style = {[{marginLeft:17}]}>
-            <ReviewStars s={10}/>
+            <ReviewStars s={10} num={4}/>
           </View>
 
           <Text style = {[styles.body, {width:30}, {marginLeft:30}, {fontSize:11}]}>(578)</Text>
