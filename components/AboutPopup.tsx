@@ -91,23 +91,6 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                 hobbies="Selfies, Content Creation, App Dev, Gaming"
                 funFact="I was born on International Women’s Day"
               />
-                            <PersonBox 
-                imgSource={require('../assets/images/bio_ian.jpeg')}
-                name="Thang (TBD)"
-                tagline="CS Junior at UW"
-                why="I was passionate about advocacy and knew unhoused people are treated as invisible."
-                role="UI/UX Lead & Frontend Developer"
-                roleDesc={
-                  <View style={{marginTop: 10}}>
-                    <Text style={{color: colors.lightGray}}>• Figma Design</Text>
-                    <Text style={{color: colors.lightGray}}>• List Page</Text>
-                    <Text style={{color: colors.lightGray}}>• Resource Page</Text>
-                    <Text style={{color: colors.lightGray}}>• Logo Design</Text>
-                  </View>
-                }
-                hobbies="Selfies, Content Creation, App Dev, Gaming"
-                funFact="I was born on International Women’s Day"
-              />
               <BasicButton label="Close" onPress={onClose}/>
             </View>
           </ScrollView>
