@@ -16,11 +16,11 @@ import { useLocalSearchParams } from 'expo-router';  // For SelectButton resourc
 import { useResourceData } from '../../utils/ResourceContext'
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
 
-const resourceRows : ResourceRow[] | undefined = useResourceData();
-const row = (resourceRows) ? resourceRows[0] : null;
-
-const title = row?.title;
 export default function resource_page() {
+  const resourceRows : ResourceRow[] | undefined = useResourceData();
+  const row = (resourceRows) ? resourceRows[0] : null;
+  const title = row?.title;
+
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
