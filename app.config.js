@@ -1,4 +1,6 @@
-{
+import 'dotenv/config'
+
+export default {
   "expo": {
     "name": "Unhoused-Resources-Project",
     "slug": "Unhoused-Resources-Project",
@@ -37,6 +39,11 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    extra: {
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+      TEST_ENV: process.env.TEST_ENV,
+    },
   }
 }

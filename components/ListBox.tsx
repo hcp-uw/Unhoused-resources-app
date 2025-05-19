@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, Pressable} from 'react-native';
 import ReviewStars from '@/components/ReviewStars';
 import Bookmark from '@/components/Bookmark';
 
@@ -10,14 +10,17 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-type Props = {
-    name: String,
-    type: String,
-    dem: String,
-    time: String,
-    dist: String,
-}
-export default function ListBox({name, type, dem, time, dist}: Props) {
+import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import { router } from 'expo-router';
+
+// type Props = {
+//     name: String,
+//     type: String,
+//     dem: String,
+//     time: String,
+//     dist: String,
+// }
+export default function ListBox({ id, title, rating, lat, long,resource_type_id}: ResourceRow) {
       const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
@@ -29,48 +32,66 @@ export default function ListBox({name, type, dem, time, dist}: Props) {
         
       });
 
+      let type;
+      if(resource_type_id===0){
+        type = 'Hygiene'
+      }
+      if(resource_type_id===1){
+        type = 'Food'
+      }
+      if(resource_type_id===2){
+        type = 'Medical'
+      }
+      if(resource_type_id===3){
+        type = 'Shelter'
+      }
+
+      function doHandleClick(): void {
+        router.navigate(`/list_page?resource_page`);
+      }
+
     return (
-        <View style={styles.box}>
-            <View style={styles.header}>
+        <Pressable onPress={doHandleClick}>
+            <View style={styles.box}>
+                <View style={styles.header}>
+                    <View style={styles.rowContainer}>
+                        <View style={{borderWidth: 0, width: 320, justifyContent:'center'}}>
+                            <Text style={styles.title}>{title}</Text>
+                        </View>
+            
+                        <View style={{borderWidth: 0, marginLeft: 0}}>
+                            <Bookmark/>
+                        </View>
+            
+                    </View>
+            
+                </View>
                 <View style={styles.rowContainer}>
-                    <View style={{borderWidth: 0, width: 320, justifyContent:'center'}}>
-                        <Text style={styles.title}>{name}</Text>
+                    <View style={styles.bodyBox}>
+                        <View style={styles.rowContainer}>
+                        <AntDesign name="questioncircle" size={20} color="#37637C" marginLeft={2}/>
+                            <Text style={styles.body}>{type}</Text>
+                        </View>
+                        <View style={styles.rowContainer}>
+                            <Ionicons name="people" size={24} color="#37637C" />
+                            <Text style={[styles.body, {marginLeft:14}]}>Unavailable</Text>
+                        </View>
+                        <View style={styles.rowContainer}>
+                            <AntDesign name="clockcircle" size={20} color="#37637C" marginLeft={2}/>
+                            <Text style={styles.body}>Unavailable</Text>
+                        </View>
+                        <View style={styles.rowContainer}>
+                        <FontAwesome6 name="road" size={20} color="#37637C" marginLeft={1}/>
+                            <Text style={[styles.body, {marginLeft:15}]}>(DestY-UserY)^2 + (DestX-UserX)^2</Text>
+                        </View>
                     </View>
-                    
-                    <View style={{borderWidth: 0, marginLeft: 0}}>
-                        <Bookmark/>
+                    <View style={styles.starBox}>
+                        <ReviewStars s={16} num={rating}></ReviewStars>
                     </View>
-                    
-                </View>
-                
-            </View>
-            <View style={styles.rowContainer}>
-                <View style={styles.bodyBox}>
-                    <View style={styles.rowContainer}>
-                    <AntDesign name="questioncircle" size={20} color="#37637C" marginLeft={2}/>
-                        <Text style={styles.body}>{type}</Text>
-                    </View>
-                    <View style={styles.rowContainer}>
-                        <Ionicons name="people" size={24} color="#37637C" />
-                        <Text style={styles.body}>{dem}</Text>
-                    </View>
-                    <View style={styles.rowContainer}>
-                        <AntDesign name="clockcircle" size={20} color="#37637C" marginLeft={2}/>
-                        <Text style={styles.body}>{time}</Text>
-                    </View>
-                    <View style={styles.rowContainer}>
-                    <FontAwesome6 name="road" size={20} color="#37637C" marginLeft={1}/>
-                        <Text style={styles.body}>{dist}</Text>
-                    </View>
-                </View>
-                <View style={styles.starBox}>
-                    <ReviewStars s={16}></ReviewStars>
-                </View>
-                
-            </View>
             
-            
-        </View>
+                </View>
+            </View>
+        </Pressable>
     );
 }
 
@@ -96,12 +117,13 @@ const styles = StyleSheet.create({
         // borderWidth: 2,
         flex: 1,
         justifyContent: 'flex-end',
-        marginBottom: 12,
+        marginBottom: 17,
     },
     header: {
         backgroundColor: '#37637C',
         width: 360,
         height: 50,
+        marginBottom: 10,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         justifyContent: 'center',
@@ -118,6 +140,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-BoldItalic',
         marginLeft: 18,
         marginBottom: 3,
+        borderColor: 'pink',
+        borderWidth: 1,
     },
     rowContainer: {
         flexDirection: 'row',
