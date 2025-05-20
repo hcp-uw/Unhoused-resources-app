@@ -7,9 +7,9 @@ import { Link, router } from 'expo-router';
 export default function SettingScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>settings_page</Text>
       <BasicButton label="Resource Page" onPress={() => router.push('/resource_page')} />
       <BasicButton label="List Page" onPress={() => router.push('/list_page')}/>
+      <BasicButton label="Test Page" onPress={() => router.push('/test_page')}/>
     </View>
   );
 }
