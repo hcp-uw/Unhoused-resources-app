@@ -2,13 +2,14 @@ import colors from "@/app/colors";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
+  label: string;
   onPress: () => void;
 }
 
-export default function AboutButton({ onPress }: Props) {
+export default function BasicButton({ label, onPress }: Props) {
   return (
     <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonLabel}>About Us / Mission</Text>
+        <Text style={styles.buttonLabel}>{label}</Text>
     </Pressable>
   );
 }
@@ -16,12 +17,13 @@ export default function AboutButton({ onPress }: Props) {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
-    width: 230,
-    height: 50,
+    paddingHorizontal: 25,
+    paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: colors.navyBlue,
+    alignSelf: 'center'
   },
   buttonLabel: {
     color: 'white',

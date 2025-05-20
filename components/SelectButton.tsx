@@ -28,34 +28,14 @@ export default function SelectButton({ label, source }: Props) {
       </Pressable>
       </View>
   );
-
-  // return (
-  //   <View style={styles.buttonContainer}>
-  //   <Pressable 
-  //       style={styles.button} 
-  //       onPress={() => alert('You pressed a button.')}>
-  //       <View>
-  //           <Text style={styles.buttonLabel}>{label}</Text>
-  //       </View>
-  //       <View style={styles.buttonImgContainer}>
-  //           <Image 
-  //               source={source}
-  //               resizeMode="contain"
-  //               style={styles.buttonImg}
-  //           />
-  //       </View>
-  //   </Pressable>
-  //   </View>
-  // );
 }
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: '50%',
+    width: '47%',
     aspectRatio: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '3%',
   },
   button: {
     borderRadius: 10,

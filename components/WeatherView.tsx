@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import * as Location from 'expo-location';
-import { Image, Pressable, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
-import { Feather, MaterialIcons } from '@expo/vector-icons'
+import { Animated, Image, Platform, Pressable, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { Feather } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { Foundation } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
-import colors from "@/app/colors";
+import { FontAwesome5 } from '@expo/vector-icons';
 import AlertItem from "./WeatherAlert";
-
 
 export type Alert = {
   headline: string;
@@ -24,63 +21,68 @@ export type Alert = {
 }
 
 type Weather = {
-    temp_c: number;
-    temp_f: number;
-    is_day: boolean;
-    condition: {
-        text: string;
-        icon: string;
-    };
-    wind_mph: number;
-    wind_kph: number;
-    wind_dir: string;
-    precip_mm: number;
-    precip_in: number;
-    uv: number;
-};
+  temp_c: number;
+  temp_f: number;
+  is_day: boolean;
+  condition: {
+    text: string;
+    icon: string;
+  };
+  wind_mph: number;
+  wind_kph: number;
+  wind_dir: string;
+  precip_mm: number;
+  precip_in: number;
+  uv: number;
+}
 
 export default function WeatherView() {
-    const [location, setLocation] = useState<Location.LocationObject | null>(
-        null
-    );
-    const [alerts, setAlerts] = useState<Alert[]>([]);
-    const [weather, setWeather] = useState<Weather | null>(null);
-    const [isAmer, setIsAmer] = useState<boolean>(true);
-    const [refresh, setRefresh] = useState<boolean>(false);
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [weather, setWeather] = useState<Weather | null>(null);
+  const [isAmer, setIsAmer] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const spinAnim = useRef(new Animated.Value(0)).current;
 
-    useEffect(() => {
-        console.log("getting location");
-        getCurrentLocationAysnc();
-    }, [refresh]);
+  useEffect(() => {
+    setIsLoading(true);
+    startSpinning();
+    getCurrentLocationAysnc();
+  }, []);
 
-    useEffect(() => {
-        console.log("getting weather");
-        if (location) {
-            getWeatherAsync();
-            getWeatherAlertsAsync();
-        }
-    }, [location, refresh]);
+  useEffect(() => {
+    if (location) {
+      getWeatherAsync();
+      getWeatherAlertsAsync();
+    }
+  }, [location]);
 
-    const toggleSwitch = () => setIsAmer((previousState) => !previousState);
+  useEffect(() => {
+    if (isLoading) {
+      stopSpinning();
+      setIsLoading(false);
+    }
+  }, [weather]);
 
-    const getCurrentLocationAysnc = async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-            console.log("location permissions failed");
-            return;
-        }
+  const toggleSwitch = () => setIsAmer(previousState => !previousState);
 
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-        console.log("location set as " + location.coords.latitude);
-    };
+  const getCurrentLocationAysnc = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.log("location permissions failed");
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  }
 
   const getWeatherAlertsAsync = async () => {
     if (location === null) {
       return;
     }
     try {
-      const response = await fetch('https://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+      const response = await fetch('http://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
           // + '71282' );  // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
@@ -96,7 +98,7 @@ export default function WeatherView() {
       return;
     }
     try {
-      const response = await fetch('https://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
+      const response = await fetch('http://api.weatherapi.com/v1/current.json?key=0b50c9222bd8438ea0d232922252402&q=' 
           // + '71282' ); // location for testing
           + location.coords.latitude + ','
           + location.coords.longitude );
@@ -107,22 +109,92 @@ export default function WeatherView() {
     }
   }
 
+  const startSpinning = () => {
+    spinAnim.setValue(0);
+    Animated.loop(
+      Animated.timing(spinAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: Platform.OS !== 'web',
+      })
+    ).start();
+  }
+
+  const stopSpinning = () => {
+    spinAnim.stopAnimation(() => {
+      spinAnim.setValue(0);
+    })
+  }
+
+  const spin = spinAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const handleRefesh = async () => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    startSpinning();
+
+    await getCurrentLocationAysnc();
+    await Promise.all([
+      getWeatherAsync(),
+      getWeatherAlertsAsync()
+    ]);
+
+    if (!isLoading) return;
+
+    stopSpinning();
+    setIsLoading(false);
+  }
+
   return (
     <View style={styles.weatherContainer}>
       {(weather === null) ? (
         <View style={styles.weatherHeader}>
           <View style={styles.weatherTop}>
-              <View style={styles.weatherRefresh}/>
-              <View style={styles.weatherSwitch}/>
+            <Pressable onPress={handleRefesh} style={{ paddingTop: 15, paddingLeft: 15 }}>
+              <Animated.View style={{ transform: [{ rotate: spin }]}}>
+                <SimpleLineIcons 
+                  name="refresh" 
+                  size={20}
+                  style={{ color: isLoading ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.5)' }}
+                />
+              </Animated.View>
+            </Pressable>
+            <View style={styles.weatherSwitch}>
+              <Text style={styles.switchLabel}>°F</Text>
+              <Switch 
+                trackColor={{false: '#A9A9A9', true: '#A9A9A9'}}
+                thumbColor='#f3f3f3'
+                ios_backgroundColor='#A9A9A9'
+                onValueChange={toggleSwitch}
+                value={!isAmer}
+              />
+              <Text style={styles.switchLabel}>°C</Text>
+            </View>
           </View>
           <View style={styles.weatherContent}>
-            <Text style={styles.headerText}>Loading...</Text>
+            <View style={styles.iconContainer}>
+              <FontAwesome5 name="cloud-sun" size={36} color='white' style={{ padding: 5, opacity: 0.5 }} />
+              <Text style={[styles.iconLabel, {opacity: 0.5}]}>- - - - - - - -</Text>
+            </View>
+            <WeatherInfo isAmer={isAmer} isEmpty={true}/>
           </View>
         </View>
       ) : (
         <View style={styles.weatherHeader}>
           <View style={styles.weatherTop}>
-            <Pressable onPress={() => setRefresh(prev => !prev)}><SimpleLineIcons name="refresh" style={styles.weatherRefresh}/></Pressable>
+            <Pressable onPress={handleRefesh} style={{ paddingTop: 15, paddingLeft: 15 }}>
+              <Animated.View style={{ transform: [{ rotate: spin }]}}>
+                <SimpleLineIcons 
+                  name="refresh" 
+                  size={20}
+                  style={{ color: isLoading ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.5)' }}
+                />
+              </Animated.View>
+            </Pressable>
             <View style={styles.weatherSwitch}>
               <Text style={styles.switchLabel}>°F</Text>
               <Switch 
@@ -145,7 +217,7 @@ export default function WeatherView() {
         {alerts
           .filter((item, index, self) => index === self.findIndex(a => a.headline === item.headline))
           .map(item => (
-            <AlertItem alert={item}/>
+            <AlertItem alert={item} key={item.headline}/>
         ))}
       </View>
     </View>
@@ -153,61 +225,53 @@ export default function WeatherView() {
 }
 
 type WeatherIconProps = {
-    iconPath: string;
-    altText: string;
+  iconPath: string;
+  altText: string;
 };
 
 function WeatherIcon({ iconPath, altText }: WeatherIconProps) {
-    const iconUrl = `https:${iconPath}`;
+  const iconUrl = `https:${iconPath}`;
 
-    return (
-        <View style={styles.iconContainer}>
-            <Image source={{ uri: iconUrl }} style={styles.icon} />
-            <Text style={styles.iconLabel}>{altText}</Text>
-        </View>
-    );
+  return (
+    <View style={styles.iconContainer}>
+      <Image
+        source={{uri: iconUrl}}
+        style={styles.icon}
+      />
+      <Text style={styles.iconLabel}>{altText}</Text>
+    </View>
+  )
 }
 
 type WeatherInfoProps = {
-    isAmer: boolean;
-    weather: Weather;
+  isAmer: boolean;
+  weather?: Weather;
+  isEmpty?: boolean;
 };
 
-function WeatherInfo({ isAmer, weather }: WeatherInfoProps) {
-    return isAmer ? (
+function WeatherInfo({ isAmer, weather, isEmpty }: WeatherInfoProps) {
+  return (
+    isAmer ? (
         <View style={styles.weatherInfo}>
-            <Text style={styles.infoTemp}>{weather.temp_f} °F</Text>
-            <Text style={styles.infoSmall}>
-                {weather.wind_mph} mph <Feather name="wind" />
-            </Text>
-            <Text style={styles.infoSmall}>
-                {weather.precip_in} in <Ionicons name="rainy" />
-            </Text>
-            <Text style={styles.infoSmall}>
-                {weather.uv} UV{" "}
-                <MaterialCommunityIcons name="sun-wireless-outline" />
-            </Text>
+          <Text style={[styles.infoTemp, {opacity: isEmpty ? 0.5 : 1}]}>{isEmpty? "---" : weather?.temp_f} °F</Text>
+          <Text style={styles.infoSmall}>{isEmpty? "---" : weather?.wind_mph} mph  <Feather name="wind" /></Text>
+          <Text style={styles.infoSmall}>{isEmpty? "---" : weather?.precip_in} in  <Ionicons name="rainy" /></Text>
+          <Text style={styles.infoSmall}>{isEmpty? "---" : weather?.uv} UV  <MaterialCommunityIcons name="sun-wireless-outline" /></Text>
         </View>
     ) : (
-        <View style={styles.weatherInfo}>
-            <Text style={styles.infoTemp}>{weather.temp_c} °C</Text>
-            <Text style={styles.infoSmall}>
-                {weather.wind_kph} kph <Feather name="wind" />
-            </Text>
-            <Text style={styles.infoSmall}>
-                {weather.precip_mm} mm <Ionicons name="rainy" />
-            </Text>
-            <Text style={styles.infoSmall}>
-                {weather.uv} UV{" "}
-                <MaterialCommunityIcons name="sun-wireless-outline" />
-            </Text>
-        </View>
-    );
+      <View style={styles.weatherInfo}>
+        <Text style={[styles.infoTemp, {opacity: isEmpty? 0.5 : 1}]}>{isEmpty? "---" : weather?.temp_c} °C</Text>
+        <Text style={styles.infoSmall}>{isEmpty? "---" : weather?.wind_kph} kph  <Feather name="wind" /></Text>
+        <Text style={styles.infoSmall}>{isEmpty? "---" : weather?.precip_mm} mm  <Ionicons name="rainy" /></Text>
+        <Text style={styles.infoSmall}>{isEmpty? "---" : weather?.uv} UV  <MaterialCommunityIcons name="sun-wireless-outline" /></Text>
+      </View>
+    )
+  );
 }
 
 const styles = StyleSheet.create({
   weatherContainer: {
-    width: '80%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
@@ -226,13 +290,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingRight: 5,
     marginBottom: 5
-  },
-  weatherRefresh: {
-    color: 'white',
-    fontSize: 20,
-    paddingTop: 15,
-    paddingLeft: 15,
-    opacity: 0.5,
   },
   weatherSwitch: {
     display: 'flex',
@@ -255,14 +312,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingHorizontal: 25,
-    paddingBottom: 25,
+    paddingBottom: 20,
     alignItems: 'center'
   },
   headerText: {
     color: 'white',
   },
   alertsContainer: {
-    margin: 5,
+    gap: 12,
+    marginTop: 20,
+    margin: 10,
   },
   iconContainer: {
     alignItems: 'center',
