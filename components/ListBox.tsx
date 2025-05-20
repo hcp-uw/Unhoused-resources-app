@@ -20,7 +20,7 @@ import { router } from 'expo-router';
 //     time: String,
 //     dist: String,
 // }
-export default function ListBox({ id, title, rating, lat, long,resource_type_id}: ResourceRow) {
+export default function ListBox({ id, title, rating, lat, long,resource_type, time_open, demographic}: ResourceRow) {
       const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
@@ -32,19 +32,7 @@ export default function ListBox({ id, title, rating, lat, long,resource_type_id}
         
       });
 
-      let type;
-      if(resource_type_id===0){
-        type = 'Hygiene'
-      }
-      if(resource_type_id===1){
-        type = 'Food'
-      }
-      if(resource_type_id===2){
-        type = 'Medical'
-      }
-      if(resource_type_id===3){
-        type = 'Shelter'
-      }
+      let type = resource_type;
 
       function doHandleClick(): void {
         router.navigate(`/list_page?resource_page`);
@@ -74,11 +62,11 @@ export default function ListBox({ id, title, rating, lat, long,resource_type_id}
                         </View>
                         <View style={styles.rowContainer}>
                             <Ionicons name="people" size={24} color="#37637C" />
-                            <Text style={[styles.body, {marginLeft:14}]}>Unavailable</Text>
+                            <Text style={[styles.body, {marginLeft:14}]}>{demographic}</Text>
                         </View>
                         <View style={styles.rowContainer}>
                             <AntDesign name="clockcircle" size={20} color="#37637C" marginLeft={2}/>
-                            <Text style={styles.body}>Unavailable</Text>
+                            <Text style={styles.body}>{time_open}</Text>
                         </View>
                         <View style={styles.rowContainer}>
                         <FontAwesome6 name="road" size={20} color="#37637C" marginLeft={1}/>
