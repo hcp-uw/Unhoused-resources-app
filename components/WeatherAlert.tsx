@@ -9,12 +9,13 @@ type AlertProps = {
   
 export default function AlertItem({ alert }: AlertProps) {
   const [isInstructionOpen, setIsInstructionOpen] = useState<boolean>(false);
+  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
 
   return (
     <View style={styles.alertContainer}>
       <View style={styles.alertHeader}>
         <Foundation name="alert" style={styles.alertIcon}/>
-        <Text style={styles.alertText}>Weather {alert.msgtype}</Text>
+        <Text style={{color: 'white'}}>Weather {alert.msgtype}</Text>
       </View>
       <View style={styles.alertContent}>
         <View style={styles.alertContentHeader}>
@@ -25,10 +26,10 @@ export default function AlertItem({ alert }: AlertProps) {
           </View>
         </View>
         {alert.instruction ? (
-          <View style={styles.alertInstruction}>
+          <Pressable onPress={() => setIsInstructionOpen(!isInstructionOpen)} style={styles.alertInstruction}>
             <View style={styles.alertInstructionHeader}>
               <Text style={styles.alertText}>Instructions</Text>
-              <Pressable onPress={() => setIsInstructionOpen(!isInstructionOpen)}><MaterialIcons name="expand-more" color={'white'} size={24}/></Pressable>
+              <MaterialIcons name="expand-more" color={'white'} size={24}/>
             </View>
             {isInstructionOpen ? (
               <View style={styles.alertInstructionContent}>
@@ -37,12 +38,26 @@ export default function AlertItem({ alert }: AlertProps) {
             ):(
               <View></View>
             )}
-          </View>
+          </Pressable>
         ):(
           <View></View>
         )}
       </View>
-      {/* <Text>{alert.desc}</Text> */}
+      {isDetailOpen ? (
+        <Pressable onPress={() => setIsDetailOpen(!isDetailOpen)}>
+          <View style={styles.alertDetails}>
+            <Text style={styles.alertText}>{alert.desc}</Text>
+          </View>
+          <View style={styles.alertFooter}>
+            <MaterialIcons name="expand-more" color={'white'} size={24}/>
+          </View>
+        </Pressable>
+      ):(
+        <Pressable onPress={() => setIsDetailOpen(!isDetailOpen)} style={styles.alertFooter}>
+          <Text></Text>
+          <MaterialIcons name="expand-more" color={'white'} size={24}/>
+        </Pressable>
+      )}
     </View>
   )
 }
@@ -51,9 +66,8 @@ const styles = StyleSheet.create({
   alertContainer: {
     backgroundColor: '#4F5D6C',
     borderRadius: 10,
-    marginTop: 10,
     flexDirection: 'column',
-    width: '90%',
+    width: '100%',
     alignSelf: 'center'
   },
   alertHeader: {
@@ -102,15 +116,26 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderStyle: 'dashed'
   },
-  alertExpand: {
-
-  },
   alertText: {
     color: 'white',
+    fontSize: 12
   },
   alertIcon: {
     color: 'white',
     fontSize: 18,
     marginRight: 8,
   },
+  alertFooter: {
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    alignItems: 'center',
+    borderTopColor: '#708394',
+    borderTopWidth: 1,
+  },
+  alertDetails: {
+    padding: 10,
+    paddingHorizontal: 20,
+    borderTopColor: '#708394',
+    borderTopWidth: 1,
+  }
 });
