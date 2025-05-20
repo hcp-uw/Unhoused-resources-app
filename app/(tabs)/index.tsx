@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
   },
   header: {
     fontWeight: 'bold',
-    fontSize: 35,
+    fontSize: 30,
     color: colors.navyBlue,
-    textAlign: 'left',
+    textAlign: 'center',
     width: '100%',
   },
   buttonsContainer: {

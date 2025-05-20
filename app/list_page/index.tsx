@@ -23,7 +23,7 @@ export default function list_page() {
             {/* Feel free to delete things below. Its just to help you see an example of the values & displaying it on screen*/}
             <Text>Resource_label is {local.resource_label}</Text>
             {/* {resourceRows ? (<Text>{resourceRows[0].id}</Text>) : (<Text> Loading: Fetching resourceRows... </Text>)} */}
-            {resourceRows ? (resourceRows.map((row) => {return <ListBox {...row}/>;})) : (<Text>Loading: ResourceRows is loading or may be null</Text>)}
+            {resourceRows ? (resourceRows.map((row) => {return <ListBox key={row.id} {...row}/>;})) : (<Text key="1"> Loading: ResourceRows is loading or may be null</Text>)}
 
             {/* <ListBox name='King County Homeless Services' type='Housing' dem='Anyone' time='8:00 pm - 8:00 am' dist='3 miles away'/>
             <ListBox name='Capitol Hill Community Lunch' type='Meals' dem='Seniors' time='10:00 am - 3:00 pm' dist='5 miles away'/>

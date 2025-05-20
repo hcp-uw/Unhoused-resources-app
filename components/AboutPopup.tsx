@@ -37,8 +37,8 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                   </View>
                 }
                 hobbies="I like running, piano, video games, language-learning"
-                moreHobbies="Age of Empires, God of War, Invincible, TERRARIA"
-                funFact="I can possibly act well"
+                moreHobbies="Video games I liek are: Age of Empires, God of War, Invincible, Terraria, Apex Legends"
+                funFact="I think I can act in a play pretty well"
               />
               <PersonBox 
                 imgSource={require('../assets/images/bio_ian.jpeg')}
@@ -75,7 +75,7 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                 funFact="I have written, composed, and directed a 40-minute musical"
               />
               <PersonBox 
-                imgSource={require('../assets/images/bio_ian.jpeg')}
+                imgSource={require('../assets/images/bio_rai.png')}
                 name="Rahil (TDB)"
                 tagline="CS Junior at UW"
                 why="I was passionate about advocacy and knew unhoused people are treated as invisible."
