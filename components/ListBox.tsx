@@ -20,23 +20,25 @@ import { router } from 'expo-router';
 //     time: String,
 //     dist: String,
 // }
-export default function ListBox({ id, title, rating, lat, long,resource_type, time_open, demographic}: ResourceRow) {
-      const [fontsLoaded] = useFonts({
-        "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
-        "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
-        "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
-        "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
-        "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
-        "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
-        "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
-        
-      });
+type ResourceRowPlusIndex = ResourceRow & { index: number }; // Need index passed to give to resource_page for easy access to correct row!
 
-      let type = resource_type;
+export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic, index }: ResourceRowPlusIndex) {
+    const [fontsLoaded] = useFonts({
+      "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
+      "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
+      "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
+      "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
+      "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
+      "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
+      "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
+      
+    });
 
-      function doHandleClick(): void {
-        router.navigate(`/list_page?resource_page`);
-      }
+    let type = resource_type;
+
+    function doHandleClick(): void {
+      router.navigate(`/resource_page?resourceRowIndex=${index}`);
+    }
 
     return (
         <Pressable onPress={doHandleClick}>
