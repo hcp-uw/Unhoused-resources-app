@@ -12,6 +12,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
 import { router } from 'expo-router';
+import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
 // type Props = {
 //     name: String,
@@ -20,8 +21,10 @@ import { router } from 'expo-router';
 //     time: String,
 //     dist: String,
 // }
-export default function ListBox({ id, title, rating, lat, long,resource_type, time_open, demographic}: ResourceRow) {
-      const [fontsLoaded] = useFonts({
+type ResourceRowPlusIndex = ResourceRow & { index: number }; // Need index passed to give to resource_page for easy access to correct row!
+
+export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic, index }: ResourceRowPlusIndex) {
+    const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
         "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
@@ -30,13 +33,17 @@ export default function ListBox({ id, title, rating, lat, long,resource_type, ti
         "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
         "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
         
-      });
+    });
 
-      let type = resource_type;
+    const location = useLocationData();
+    const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') 
+        ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : 'location is loading';
 
-      function doHandleClick(): void {
-        router.navigate(`/list_page?resource_page`);
-      }
+    let type = resource_type;
+
+    function doHandleClick(): void {
+        router.navigate(`/resource_page?resourceRowIndex=${index}`);
+    }
 
     return (
         <Pressable onPress={doHandleClick}>
@@ -70,7 +77,7 @@ export default function ListBox({ id, title, rating, lat, long,resource_type, ti
                         </View>
                         <View style={styles.rowContainer}>
                         <FontAwesome6 name="road" size={20} color="#37637C" marginLeft={1}/>
-                            <Text style={[styles.body, {marginLeft:15}]}>(DestY-UserY)^2 + (DestX-UserX)^2</Text>
+                            <Text style={[styles.body, {marginLeft:15}]}>{dist} km</Text>
                         </View>
                     </View>
                     <View style={styles.starBox}>
