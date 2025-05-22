@@ -12,7 +12,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
 import { router } from 'expo-router';
-import getLocation, { getStraightDistanceInKilometers } from '@/utils/locationGetter';
+import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
 // type Props = {
 //     name: String,
@@ -35,9 +35,9 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
         
     });
 
-    const location = getLocation();
+    const location = useLocationData();
     const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') 
-        ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : -1;
+        ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : 'location is loading';
 
     let type = resource_type;
 
