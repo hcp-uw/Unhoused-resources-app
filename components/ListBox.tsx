@@ -12,6 +12,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
 import { router } from 'expo-router';
+import getLocation, { getStraightDistanceInKilometers } from '@/utils/locationGetter';
 
 // type Props = {
 //     name: String,
@@ -24,20 +25,24 @@ type ResourceRowPlusIndex = ResourceRow & { index: number }; // Need index passe
 
 export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic, index }: ResourceRowPlusIndex) {
     const [fontsLoaded] = useFonts({
-      "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
-      "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
-      "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
-      "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
-      "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
-      "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
-      "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
-      
+        "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
+        "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
+        "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
+        "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
+        "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
+        "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
+        "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
+        
     });
+
+    const location = getLocation();
+    const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') 
+        ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : -1;
 
     let type = resource_type;
 
     function doHandleClick(): void {
-      router.navigate(`/resource_page?resourceRowIndex=${index}`);
+        router.navigate(`/resource_page?resourceRowIndex=${index}`);
     }
 
     return (
@@ -47,6 +52,7 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
                     <View style={styles.rowContainer}>
                         <View style={{borderWidth: 0, width: 320, justifyContent:'center'}}>
                             <Text style={styles.title}>{title}</Text>
+                            <Text>THIS IS DISTANCE: {dist}</Text>
                         </View>
             
                         <View style={{borderWidth: 0, marginLeft: 0}}>
