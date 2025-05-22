@@ -52,7 +52,6 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
                     <View style={styles.rowContainer}>
                         <View style={{borderWidth: 0, width: 320, justifyContent:'center'}}>
                             <Text style={styles.title}>{title}</Text>
-                            <Text>THIS IS DISTANCE: {dist}</Text>
                         </View>
             
                         <View style={{borderWidth: 0, marginLeft: 0}}>
@@ -78,7 +77,7 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
                         </View>
                         <View style={styles.rowContainer}>
                         <FontAwesome6 name="road" size={20} color="#37637C" marginLeft={1}/>
-                            <Text style={[styles.body, {marginLeft:15}]}>(DestY-UserY)^2 + (DestX-UserX)^2</Text>
+                            <Text style={[styles.body, {marginLeft:15}]}>{dist} km</Text>
                         </View>
                     </View>
                     <View style={styles.starBox}>

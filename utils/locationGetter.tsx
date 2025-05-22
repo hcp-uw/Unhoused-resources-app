@@ -25,6 +25,6 @@ export default function getLocation() {
 
 export function getStraightDistanceInKilometers(startLat : number, startLong : number, endLat : number, endLong : number) : number {
   // console.log("Lat & long", startLat, startLong, endLat, endLong)
-  const dist = 111139 * Math.sqrt(Math.pow(startLat-endLat, 2) + Math.pow(startLong-endLong, 2))
+  const dist = Math.floor(111139 * Math.sqrt(Math.pow(startLat-endLat, 2) + Math.pow(startLong-endLong, 2))) / 1000;
   return dist;
 }
