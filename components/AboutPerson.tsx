@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     gap: 25,
   },
   img: {
-    maxWidth: '50%',
+    width: '50%',
+    maxWidth: 300,
     aspectRatio: 1,
     height: '100%',
     borderRadius: 5,
