@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     color: colors.navyBlue,
-    textAlign: 'center',
+    textAlign: 'left',
     width: '100%',
   },
   buttonsContainer: {
