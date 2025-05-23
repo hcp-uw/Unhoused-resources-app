@@ -35,7 +35,7 @@ const ResourceProvider = ({ children }: Props) => {
           // DONT DO THIS: setResourceRows(data as ResourceRow[]);
           const rrArr: ResourceRow[] | undefined = returnValidatedResourceRowArr(data);
           setResourceRows(rrArr);  // State update schedule here!
-          console.log("JSON.stringified supabase.data : ", JSON.stringify(data))
+          //console.log("JSON.stringified supabase.data : ", JSON.stringify(data))
         } else {
           Alert.alert("ERROR: unknown error for data");
         }

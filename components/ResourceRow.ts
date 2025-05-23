@@ -8,8 +8,11 @@ export type ResourceRow = {
   maps_url: string;
   website: string;
   phone: string;  // ! Phone is of type STRING! bc of 954-206 dash!
-  resource_type_id: number;
   updated_at: string;  // TODO: convert to Date later!
+
+  time_open: string;
+  demographic: string;
+  resource_type: string;
 };
 
 // Validation technique to cast supabase.data's any[0]/any[1]/... to a ResourceRow!
@@ -26,8 +29,11 @@ export function returnValidatedResourceRow(dataVal: any): undefined | ResourceRo
     typeof dataVal.maps_url === 'string' && 
     typeof dataVal.website === 'string' && 
     typeof dataVal.phone === 'string' && 
-    typeof dataVal.resource_type_id === 'number' && 
-    typeof dataVal.updated_at === 'string';  // to be convt to Date later
+    typeof dataVal.updated_at === 'string' &&  // to be convt to Date later
+
+    typeof dataVal.time_open === 'string' &&
+    typeof dataVal.demographic === 'string' &&
+    typeof dataVal.resource_type === 'string';
 
   if (!isValid) {
     console.error("Error: given dataVal could not be validated to ResourceRow!", dataVal);
@@ -43,8 +49,11 @@ export function returnValidatedResourceRow(dataVal: any): undefined | ResourceRo
       maps_url: dataVal.maps_url,
       website: dataVal.website,
       phone: dataVal.phone,
-      resource_type_id: dataVal.resource_type_id,
       updated_at: dataVal.updated_at,
+
+      time_open: dataVal.time_open,
+      demographic: dataVal.demographic,
+      resource_type: dataVal.resource_type,
     }
     return rr;
   }
@@ -74,7 +83,10 @@ export function resourceRowToString(rr: ResourceRow) : string {
     Maps: ${rr.maps_url}
     Website: ${rr.website}
     Phone: ${rr.phone}
-    Type ID: ${rr.resource_type_id}
     Last Updated: ${rr.updated_at}
+
+    Time Open: ${rr.time_open}
+    Demographic: ${rr.demographic}
+    Resource Type: ${rr.resource_type}
   `.trim();
 }

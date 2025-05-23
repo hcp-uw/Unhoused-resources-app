@@ -18,7 +18,9 @@ import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
 
 export default function resource_page() {
   const resourceRows : ResourceRow[] | undefined = useResourceData();
-  const row = (resourceRows) ? resourceRows[0] : null;
+  const local = useLocalSearchParams();  // for local.resourceRowIndexId to get your specific resourceRow
+  const myRowIndex = (typeof local.resourceRowIndex === 'string') ? (parseInt(local.resourceRowIndex)) : (parseInt(local.resourceRowIndex[0])) ;
+  const row = (resourceRows) ? resourceRows[myRowIndex] : null;
   const title = row?.title;
 
   const [fontsLoaded] = useFonts({
@@ -30,6 +32,8 @@ export default function resource_page() {
     "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
     "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
   });
+
+
 
   return (
     <View style={{flex: 1, height: 100}}>

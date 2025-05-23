@@ -52,7 +52,7 @@ export default function test_page() {
       {/* CONDITIONAL RENDERING: Ternary operator - bool ? (1) : (2) -,  (1) returns JSX which is JavaScript-based HTML */}
 
       {/* {resourceRows ? (<Text>{resourceRows[0].id}</Text>) : (<Text> Loading: Fetching resourceRows... </Text>)} */}
-      {resourceRows ? (resourceRows.map((row) => {return <View><Text> {row.title}</Text><Text>    {row.lat}</Text></View>;})) : (<Text> Loading: Fetching resourceRows... </Text>)}
+      {resourceRows ? (resourceRows.map((row) => {return <View key={row.id}><Text> {row.title}</Text><Text>    {row.lat}</Text></View>;})) : (<Text> Loading: Fetching resourceRows... </Text>)}
     </View>
   )
 }
