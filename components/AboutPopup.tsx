@@ -60,7 +60,7 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
               <PersonBox 
                 imgSource={require('../assets/images/bio_celestine.png')}
                 name="Celestine Buendia"
-                tagline="Computer Science at UW"
+                tagline="Senior in Computer Science at UW"
                 why="I've always been compassionate about the lack of support for unhoused individuals, which only grew living in Seattle and seeing the U District, so I wanted to practice my SWE skills towards an important cause."
                 role="Frontend Developer & UI/UX"
                 roleDesc={

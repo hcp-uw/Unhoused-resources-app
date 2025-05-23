@@ -12,7 +12,7 @@ export default function AboutScreen() {
     <View style={styles.container}>
       <Text style={styles.text}>faq_page</Text>
       <AboutPopup isVisible={isAboutVisible} onClose={() => setIsAboutVisible(false)}/>
-      <BasicButton label="Misson / About Us" onPress={() => setIsAboutVisible(true)}/>
+      <BasicButton label="About Us" onPress={() => setIsAboutVisible(true)}/>
     </View>
   );
 }
