@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
-    padding: 10,
-    marginBottom: 15,
+    padding: 5,
+    marginBottom: 20,
   },
   personContent: {
     gap: 25,

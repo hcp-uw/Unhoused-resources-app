@@ -76,20 +76,20 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
               />
               <PersonBox 
                 imgSource={require('../assets/images/bio_ian.jpeg')}
-                name="Rahil (TDB)"
-                tagline="CS Junior at UW"
-                why="I was passionate about advocacy and knew unhoused people are treated as invisible."
-                role="UI/UX Lead & Frontend Developer"
+                name="Raahil Jain"
+                tagline="Junior in Computer Engineering at UW"
+                why="The project is impactful, and I wanted to gain experience working on mobile app development and in a team setting."
+                role="Full-Stack (Backend) Developer"
                 roleDesc={
                   <View style={{marginTop: 10}}>
-                    <Text style={{color: colors.lightGray}}>• Figma Design</Text>
-                    <Text style={{color: colors.lightGray}}>• List Page</Text>
-                    <Text style={{color: colors.lightGray}}>• Resource Page</Text>
-                    <Text style={{color: colors.lightGray}}>• Logo Design</Text>
+                    <Text style={{color: colors.lightGray}}>• Map and Map Page</Text>
+                    <Text style={{color: colors.lightGray}}>• System Design</Text>
+                    <Text style={{color: colors.lightGray}}>• Backend</Text>
+                    <Text style={{color: colors.lightGray}}>• Build System Setup</Text>
                   </View>
                 }
-                hobbies="Selfies, Content Creation, App Dev, Gaming"
-                funFact="I was born on International Women’s Day"
+                hobbies="Singing, Guitar, Video Games, Coding Projects, Learning Languages"
+                funFact="I created an SRS flashcard system on an e-paper device in C"
               />
               <BasicButton label="Close" onPress={onClose}/>
             </View>
