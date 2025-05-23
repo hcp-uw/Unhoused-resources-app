@@ -11,7 +11,7 @@ export default function Index() {
     <ScrollView>
       <View style={styles.appScreen}> 
         <View style={styles.searchSelection}>
-          <Text style={styles.header}>What are you looking for?</Text>
+          <Text style={styles.header}>What are you<br/>looking for?</Text>
           <View
             style={styles.buttonsContainer}>
 
@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
   searchSelection: {
     justifyContent: "center",
     alignItems: 'center',
-    gap: 20
+    gap: 20,
+    width: '100%',
+    maxWidth: 400
   },
   text: {
     color: "#fff",
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
   },
   weatherSection: {
     width: '100%',
+    maxWidth: 400,
     gap: 20
   }
 });
