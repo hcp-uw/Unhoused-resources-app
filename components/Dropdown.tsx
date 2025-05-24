@@ -16,13 +16,11 @@ export default function Dropdown({ header, image, text}: Props) {
   const animation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      Animated.timing(animation, {
-        toValue: isOpen ? 1 : 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    }, 50)
+    Animated.timing(animation, {
+      toValue: isOpen ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
   }, [isOpen])
 
   const animatedHeight = animation.interpolate({
