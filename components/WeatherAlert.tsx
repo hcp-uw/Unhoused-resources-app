@@ -15,13 +15,15 @@ export default function AlertItem({ alert }: AlertProps) {
     <View style={styles.alertContainer}>
       <View style={styles.alertHeader}>
         <Foundation name="alert" style={styles.alertIcon}/>
-        <Text style={{color: 'white'}}>Weather {alert.msgtype}</Text>
+        <Text style={{color: 'white'}}>Weather Alert{alert.msgtype === 'Update' ? " - Update" : ""}</Text>
       </View>
       <View style={styles.alertContent}>
         <View style={styles.alertContentHeader}>
-          <Text style={styles.alertText}>{alert.headline}</Text>
+          <View style={{ flex: 1, marginRight: '10%' }}>
+            <Text style={styles.alertText}>{alert.headline}</Text>
+          </View>
           <View style={styles.alertInfo}>
-            <Text style={styles.alertText}><MaterialCommunityIcons name="weather-cloudy-alert"/>  {alert.severity} </Text>
+            <Text style={[styles.alertText, {marginBottom: 5}]}><MaterialCommunityIcons name="weather-cloudy-alert"/>  {alert.severity} </Text>
             <Text style={styles.alertText}><MaterialCommunityIcons name="timer-sand-complete"/>  {alert.urgency} </Text>
           </View>
         </View>
@@ -54,7 +56,6 @@ export default function AlertItem({ alert }: AlertProps) {
         </Pressable>
       ):(
         <Pressable onPress={() => setIsDetailOpen(!isDetailOpen)} style={styles.alertFooter}>
-          <Text></Text>
           <MaterialIcons name="expand-more" color={'white'} size={24}/>
         </Pressable>
       )}
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     paddingLeft: 10,
-    padding: 3,
+    paddingVertical: 6,
     alignItems: 'center',
   },
   alertContent: {
@@ -86,14 +87,12 @@ const styles = StyleSheet.create({
   alertContentHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: '10%',
     alignItems: 'center',
   },
   alertInfo: {
     backgroundColor: '#708394',
     padding: 10,
     borderRadius: 5,
-    minHeight: '70%',
     justifyContent: 'space-around'
   },
   alertInstruction: {
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
   },
   alertText: {
     color: 'white',
-    fontSize: 12
+    fontSize: 12,
   },
   alertIcon: {
     color: 'white',
