@@ -31,7 +31,7 @@ export default function AlertItem({ alert }: AlertProps) {
           <Pressable onPress={() => setIsInstructionOpen(!isInstructionOpen)} style={styles.alertInstruction}>
             <View style={styles.alertInstructionHeader}>
               <Text style={styles.alertText}>Instructions</Text>
-              <MaterialIcons name="expand-more" color={'white'} size={24}/>
+              <MaterialIcons name={isInstructionOpen ? "expand-less" : "expand-more"} color={'white'} size={24}/>
             </View>
             {isInstructionOpen ? (
               <View style={styles.alertInstructionContent}>
@@ -51,7 +51,7 @@ export default function AlertItem({ alert }: AlertProps) {
             <Text style={styles.alertText}>{alert.desc}</Text>
           </View>
           <View style={styles.alertFooter}>
-            <MaterialIcons name="expand-more" color={'white'} size={24}/>
+            <MaterialIcons name="expand-less" color={'white'} size={24}/>
           </View>
         </Pressable>
       ):(
@@ -112,8 +112,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderTopColor: '#4F5D6C',
-    borderTopWidth: 2,
-    borderStyle: 'dashed'
+    borderTopWidth: 1,
   },
   alertText: {
     color: 'white',
