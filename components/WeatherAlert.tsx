@@ -15,7 +15,7 @@ export default function AlertItem({ alert }: AlertProps) {
     <View style={styles.alertContainer}>
       <View style={styles.alertHeader}>
         <Foundation name="alert" style={styles.alertIcon}/>
-        <Text style={{color: 'white'}}>Weather {alert.msgtype}</Text>
+        <Text style={{color: 'white'}}>Weather Alert{alert.msgtype === 'Update' ? " - Update" : ""}</Text>
       </View>
       <View style={styles.alertContent}>
         <View style={styles.alertContentHeader}>
