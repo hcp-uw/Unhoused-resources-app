@@ -34,7 +34,7 @@ export default function Dropdown({ header, image, text}: Props) {
         <View style={{ flex: 1, marginRight: 10 }}>
           <Text style={styles.headerText}>{header}</Text>
         </View>
-        <MaterialIcons name="expand-more" color={'white'} size={40}/>
+        <MaterialIcons name={isOpen ? "expand-less" : "expand-more"} color={'white'} size={40}/>
       </View>
         <Animated.View style={{ height: animatedHeight, overflow: 'hidden' }}>
           <View 
