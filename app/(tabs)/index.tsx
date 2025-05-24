@@ -8,10 +8,10 @@ const PlaceholderImage = require("@/assets/images/background-image.png");
 
 export default function Index() {
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View style={styles.appScreen}> 
         <View style={styles.searchSelection}>
-          <Text style={styles.header}>What are you<br/>looking for?</Text>
+          <Text style={styles.header}>{"What are you\nlooking for?"}</Text>
           <View
             style={styles.buttonsContainer}>
 
@@ -33,6 +33,7 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   appScreen: {
+    flexGrow: 1,
     backgroundColor: 'white',
     justifyContent: "center",
     alignItems: "center",
