@@ -78,7 +78,7 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                 imgSource={require('../assets/images/bio_rai.png')}
                 name="Raahil Jain"
                 tagline="Junior in Computer Engineering at UW"
-                why="The project is impactful, and I wanted to gain experience working on mobile app development and in a team setting."
+                why="The project is impactful, and I wanted to gain experience working on mobile app development and in a team setting"
                 role="Full-Stack (Backend) Developer"
                 roleDesc={
                   <View style={{marginTop: 10}}>
@@ -107,8 +107,7 @@ const styles = StyleSheet.create({
     padding: '5%',
     borderRadius: 5,
     flexDirection: 'column',
-    gap: 20,
-    margin: 25,
+    marginVertical: 60,
   },
   overlay: {
     flex: 1,
@@ -118,7 +117,8 @@ const styles = StyleSheet.create({
     color: colors.brown,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 32
+    fontSize: 32,
+    marginBottom: 20,
   },
   scrollContainer: {
     width: '100%',

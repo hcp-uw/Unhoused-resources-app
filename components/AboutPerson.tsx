@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.brown,
     borderRadius: 5,
     padding: 20,
+    marginBottom: 20,
   },
   personHeader: {
     flexDirection: 'row',
