@@ -12,15 +12,13 @@ export default function Index() {
       <View style={styles.appScreen}> 
         <View style={styles.searchSelection}>
           <Text style={styles.header}>{"What are you\nlooking for?"}</Text>
-          <View>
-            <View style={styles.buttonsContainer}>
-              <SelectButton label="Hygiene" source={require('../../assets/images/button_hygiene.png')}/>
-              <SelectButton label="Food Banks" source={require('../../assets/images/button_food.png')}/>
-            </View>
-            <View style={styles.buttonsContainer}>
-              <SelectButton label="Medical" source={require('../../assets/images/button_medical.png')}/>
-              <SelectButton label="Shelter" source={require('../../assets/images/button_shelter.png')}/>
-            </View>
+          <View style={styles.buttonsContainer}>
+            <SelectButton label="Hygiene" source={require('../../assets/images/button_hygiene.png')}/>
+            <SelectButton label="Food Banks" source={require('../../assets/images/button_food.png')}/>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <SelectButton label="Medical" source={require('../../assets/images/button_medical.png')}/>
+            <SelectButton label="Shelter" source={require('../../assets/images/button_shelter.png')}/>
           </View>
         </View>
         <View style={styles.weatherSection}>
@@ -59,10 +57,9 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     width: '100%',
-    flexWrap: 'wrap',
     flexDirection: 'row',
     gap: '6%',
-    marginBottom: '6%'
+    marginBottom: '6%',
   },
   weatherSection: {
     width: '100%',
