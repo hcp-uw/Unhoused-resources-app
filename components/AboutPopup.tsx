@@ -84,6 +84,7 @@ export default function AboutPopup({ isVisible, onClose }: AboutProps) {
                     <View style={{marginTop: 10}}>
                       <Text style={{color: colors.lightGray}}>• Home Page</Text>
                       <Text style={{color: colors.lightGray}}>• Weather Module</Text>
+                      <Text style={{color: colors.lightGray}}>• FAQ Page</Text>
                       <Text style={{color: colors.lightGray}}>• Mission / About Us Popup (This!)</Text>
                     </View>
                   }
