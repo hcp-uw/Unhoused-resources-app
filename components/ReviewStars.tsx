@@ -7,6 +7,7 @@ type Props = {
     num: number;
 }
 export default function ReviewStar({s, num}:Props){
+  num = Math.round(num);
     return (
       <View style = {styles.rowContainer}>
         {Array.from({length:num}).map((_, index)=>
