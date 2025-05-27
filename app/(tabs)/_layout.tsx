@@ -10,34 +10,38 @@ import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 
 export default function TabLayout() {
-    const [fontsLoaded] = useFonts({
-      "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
-      "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
-      "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
-      "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
-      "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
-      "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
-      "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
-    });
+  const [fontsLoaded] = useFonts({
+    "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
+    "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
+    "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
+    "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
+    "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
+  });
 
+  const headerFontSizes=30
   return (
     <>
       <StatusBar backgroundColor='black'/>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: '#EFBC06',
-          headerStyle: {
-            height: 170,
-          },
+          // NOTE: Overriding headerStyle conflicts with headerBackground & headerTitle somehow
+          // Commented out as image CANNOT fit entire background with this for some reason
+          // headerStyle: {
+          //   height: '30%',
+          // }, 
           headerBackground: () => (
             <Image
-              source={require('@/assets/images/header_bg.png')}
+              source={require('@/assets/images/header_bg2.png')}
               style={{
                 width: '100%',
                 height: '100%',
                 // borderColor: 'black',
                 // borderWidth: 2,
               }}
+              contentFit='fill'
             />
           ),
           headerShadowVisible: false,
@@ -47,7 +51,7 @@ export default function TabLayout() {
           },
           headerTitleStyle: {
             fontWeight: 'bold',
-            fontSize: 38,
+            fontSize: headerFontSizes,
             fontFamily: 'Roboto-Bold'
           },
         }}
@@ -55,8 +59,8 @@ export default function TabLayout() {
         <Tabs.Screen name="index" options={{ 
           tabBarLabel: 'Home',  
           headerTitle: () => (
-            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 38, textAlign: 'center', marginTop: 35 }}>
-            UNHOUSED{'\n'}  RESOURCES
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: headerFontSizes, textAlign: 'center', marginTop: 0 }}>
+            Unhoused Resources
             </Text>
           ),
           tabBarIcon: ({ color, focused }) => (
