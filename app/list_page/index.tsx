@@ -30,8 +30,7 @@ export default function list_page() {
     // );
 
     // !!! Console Error: Each child in a list should have a unique "key" prop -> If want to fix, use ResourceRow.id
-  
-    const filteredRow = filterResourceRowsFromButton(resourceRows);
+    const filteredAndSortedRow = filterAndSortResourceRows(resourceRows, resource_label);
 
     useEffect(() => {
         navigation.setOptions({
@@ -43,7 +42,7 @@ export default function list_page() {
           headerTintColor: 'white',
           headerTitleStyle: {
             fontWeight: 'bold',
-            fontSize: 38,
+            fontSize: 28,
             fontFamily: 'Roboto-Bold',
           },
           headerBackground: () => <HeaderBackground />,
@@ -53,12 +52,8 @@ export default function list_page() {
     
     return (
         <ScrollView>
-            {/* Feel free to delete things below. Its just to help you see an example of the values & displaying it on screen*/}
-            {/* <Text>Resource_label is {local.resource_label}</Text> */}
-            {/* {resourceRows ? (<Text>{resourceRows[0].id}</Text>) : (<Text> Loading: Fetching resourceRows... </Text>)} */}
-
             {/* NOTE: index != id. Index is made by .map, id is given my supabase retrieved id */}
-            {filteredRow ? (filteredRow.map((row, index) => {return <ListBox key={row.id} {...row} index={index}/>;})) : (<Text key="1"> Loading: ResourceRows is loading or may be null</Text>)}
+            {filteredAndSortedRow ? (filteredAndSortedRow.map((row, index) => {return <ListBox key={row.id} {...row} index={index}/>;})) : (<Text key="1"> Loading: ResourceRows is loading or may be null</Text>)}
 
             {/* <ListBox name='King County Homeless Services' type='Housing' dem='Anyone' time='8:00 pm - 8:00 am' dist='3 miles away'/>
             <ListBox name='Capitol Hill Community Lunch' type='Meals' dem='Seniors' time='10:00 am - 3:00 pm' dist='5 miles away'/>
@@ -71,17 +66,24 @@ export default function list_page() {
     );
 }
 
-function filterResourceRowsFromButton(resourceRows : ResourceRow[] | undefined) {
+function filterAndSortResourceRows(resourceRows : ResourceRow[] | undefined, resource_label: string | string[]) {
     if (resourceRows === undefined) {
         console.error("ERROR: resourceRows cannot be filtered as it is undefined");
         return resourceRows;
     } else {
-        const local = useLocalSearchParams();  // Ex. resource_label = Shelter
-        if (local.resource_label !== "Hygiene" && local.resource_label !== "Food" && local.resource_label !== "Medical" && local.resource_label !== "Shelter") {
-            console.error("ERROR: passed parameter local.resource_label does not equal ANY resource type given by home page buttons!")
-            return resourceRows;
-        }
-        const filteredRow = resourceRows.filter((row, index) => {return row.resource_type === local.resource_label})
-        return filteredRow;
+      if (resource_label !== "Hygiene" && resource_label !== "Food" && resource_label !== "Medical" && resource_label !== "Shelter") {
+          console.error("ERROR: passed parameter resource_label does not equal ANY resource type given by home page buttons!")
+          return resourceRows;
+      }
+      const filteredRow = resourceRows.filter((row, index) => {return row.resource_type === resource_label})
+      // .sort((rowA, rowB) => {
+      //   return rowA.
+      // })
+      return filteredRow;
     }
 }
+
+// TODO: create distsanceTo formula in ResourceRow.tsx?
+    // const location = useLocationData();
+    // const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') 
+    //     ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : 'location is loading';
