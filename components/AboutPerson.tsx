@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.brown,
     borderRadius: 5,
     padding: 20,
+    marginBottom: 20,
   },
   personHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
-    padding: 10,
-    marginBottom: 15,
+    marginBottom: 25,
   },
   personContent: {
     gap: 25,

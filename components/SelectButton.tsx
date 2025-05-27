@@ -11,21 +11,21 @@ type Props = {
 export default function SelectButton({ label, source }: Props) {
   return (
       <View style={styles.buttonContainer}>
-      <Pressable 
-          style={styles.button} 
-          // router.navigate: If label="Hygiene", passes resoure_label to INDEX/HOMEPAGE in useLocalSearchParams
-          onPress={() => router.navigate(`/list_page?resource_label=${label}`)}>
-          <View>
-              <Text style={styles.buttonLabel}>{label}</Text>
-          </View>
-          <View style={styles.buttonImgContainer}>
+        <Pressable 
+            style={styles.button} 
+            // router.navigate: If label="Hygiene", passes resoure_label to INDEX/HOMEPAGE in useLocalSearchParams
+            onPress={() => router.navigate(`/list_page?resource_label=${label}`)}>
+            <View>
+                <Text style={styles.buttonLabel}>{label}</Text>
+            </View>
+            <View style={styles.buttonImgContainer}>
               <Image 
                   source={source}
                   resizeMode="contain"
                   style={styles.buttonImg}
               />
-          </View>
-      </Pressable>
+            </View>
+        </Pressable>
       </View>
   );
 }
