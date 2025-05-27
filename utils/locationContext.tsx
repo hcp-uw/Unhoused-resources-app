@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import * as Location from 'expo-location';
+import { Linking } from 'react-native';
 
 type LocationContextType = { location: Location.LocationObject | undefined };
 const LocationContext = createContext<LocationContextType | undefined>(undefined);
@@ -18,9 +19,10 @@ const LocationProvider = ({ children } : Props) => {
 
   // 2.2) getCurrentLocation function
   const getCurrentLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.error("ERROR: location permissions failed");
+    let locPermissionResp = await Location.requestForegroundPermissionsAsync();
+    if (locPermissionResp.status !== 'granted') {
+      console.error("ERROR: location permissions failed, retrying");
+      Linking.openSettings();
       return;
     }
 
