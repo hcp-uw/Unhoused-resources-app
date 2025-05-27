@@ -8,18 +8,17 @@ const PlaceholderImage = require("@/assets/images/background-image.png");
 
 export default function Index() {
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View style={styles.appScreen}> 
         <View style={styles.searchSelection}>
-          <Text style={styles.header}>What are you looking for?</Text>
-          <View
-            style={styles.buttonsContainer}>
-
+          <Text style={styles.header}>{"What are you\nlooking for?"}</Text>
+          <View style={styles.buttonsContainer}>
             <SelectButton label="Hygiene" source={require('../../assets/images/button_hygiene.png')}/>
             <SelectButton label="Food Banks" source={require('../../assets/images/button_food.png')}/>
+          </View>
+          <View style={styles.buttonsContainer}>
             <SelectButton label="Medical" source={require('../../assets/images/button_medical.png')}/>
             <SelectButton label="Shelter" source={require('../../assets/images/button_shelter.png')}/>
-
           </View>
         </View>
         <View style={styles.weatherSection}>
@@ -33,16 +32,17 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   appScreen: {
+    flexGrow: 1,
     backgroundColor: 'white',
-    justifyContent: "center",
     alignItems: "center",
     padding: 32,
-    gap: 55
   },
   searchSelection: {
     justifyContent: "center",
     alignItems: 'center',
-    gap: 20
+    width: '100%',
+    maxWidth: 400,
+    marginBottom: 35,
   },
   text: {
     color: "#fff",
@@ -51,17 +51,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     color: colors.navyBlue,
-    textAlign: 'center',
+    textAlign: 'left',
     width: '100%',
+    marginBottom: 20,
   },
   buttonsContainer: {
     width: '100%',
-    flexWrap: 'wrap',
     flexDirection: 'row',
-    gap: '6%'
+    gap: '6%',
+    marginBottom: '6%',
   },
   weatherSection: {
     width: '100%',
-    gap: 20
+    maxWidth: 400,
   }
 });
