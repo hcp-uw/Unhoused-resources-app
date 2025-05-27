@@ -5,6 +5,7 @@ export type ResourceRow = {
   rating: number;
   lat: number;  // TODO: lat has a lot of decimals, will this hold up?
   long: number;
+
   maps_url: string;
   website: string;
   phone: string;  // ! Phone is of type STRING! bc of 954-206 dash!
@@ -13,51 +14,29 @@ export type ResourceRow = {
   time_open: string;
   demographic: string;
   resource_type: string;
+  address: string | null,
 };
 
-// Validation technique to cast supabase.data's any[0]/any[1]/... to a ResourceRow!
-// Note: dataVal is just one value from data: any[]
-// Similar to CSE331 ParseAuction! (Auction was also a type)
-export function returnValidatedResourceRow(dataVal: any): undefined | ResourceRow {
-  const isValid:boolean = 
-    typeof dataVal.id === 'number' &&
-    typeof dataVal.title === 'string' && 
-    typeof dataVal.description === 'string' && 
-    typeof dataVal.rating === 'number' && 
-    typeof dataVal.lat === 'number' && 
-    typeof dataVal.long === 'number' && 
-    typeof dataVal.maps_url === 'string' && 
-    typeof dataVal.website === 'string' && 
-    typeof dataVal.phone === 'string' && 
-    typeof dataVal.updated_at === 'string' &&  // to be convt to Date later
+// Adding schema map for dynamic/scalable validator update
+// NOTE: uses TypeScript mapped type!
+const ResourceRowSchema: { [K in keyof ResourceRow]: 'string' | 'number'} = {
+  id: 'number',
+  title: 'string',
+  description: 'string',
+  rating: 'number',
+  lat: 'number',
+  long: 'number',
 
-    typeof dataVal.time_open === 'string' &&
-    typeof dataVal.demographic === 'string' &&
-    typeof dataVal.resource_type === 'string';
+  maps_url: 'string',
+  website: 'string',
+  phone: 'string', 
+  updated_at: 'string',
 
-  if (!isValid) {
-    console.error("Error: given dataVal could not be validated to ResourceRow!", dataVal);
-    return undefined
-  } else {
-    const rr:ResourceRow = {
-      id: dataVal.id,
-      title: dataVal.title,
-      description: dataVal.description,
-      rating: dataVal.rating,
-      lat: dataVal.lat,
-      long: dataVal.long,
-      maps_url: dataVal.maps_url,
-      website: dataVal.website,
-      phone: dataVal.phone,
-      updated_at: dataVal.updated_at,
-
-      time_open: dataVal.time_open,
-      demographic: dataVal.demographic,
-      resource_type: dataVal.resource_type,
-    }
-    return rr;
-  }
-}
+  time_open: 'string',
+  demographic: 'string',
+  resource_type: 'string',
+  address: 'string',
+};
 
 export function returnValidatedResourceRowArr(data: any[]): undefined | ResourceRow[] {
   const rrArr: ResourceRow[] = [];
@@ -65,7 +44,7 @@ export function returnValidatedResourceRowArr(data: any[]): undefined | Resource
   for (const val of data) {
     const rr:undefined | ResourceRow = returnValidatedResourceRow(val);
     if (!rr) {  // Check if ALL rows are valid
-      console.error("Error: this specific row in given supabase.data is invalid!", val)
+      console.error("ERROR: this specific row in given supabase.data is invalid!", val)
       return undefined;
     }
     rrArr.push(rr);
@@ -74,19 +53,24 @@ export function returnValidatedResourceRowArr(data: any[]): undefined | Resource
   return rrArr;
 }
 
-export function resourceRowToString(rr: ResourceRow) : string {
-  return `
-    Title: ${rr.title}
-    Description: ${rr.description}
-    Rating: ${rr.rating}
-    Location: (${rr.lat}, ${rr.long})
-    Maps: ${rr.maps_url}
-    Website: ${rr.website}
-    Phone: ${rr.phone}
-    Last Updated: ${rr.updated_at}
+// Validation technique to cast supabase.data's any[0]/any[1]/... to a ResourceRow!
+// Note: dataVal is just one value from data: any[]
+// Similar to CSE331 ParseAuction! (Auction was also a type)
+export function returnValidatedResourceRow(dataVal: any): ResourceRow | undefined {
+  for (const key in ResourceRowSchema) {
+    const expectedType = ResourceRowSchema[key as keyof ResourceRow]
+    if (typeof dataVal[key] !== expectedType) {
+      console.error(`ERROR: Invalid typing for ${key}! | Expected: ${expectedType}, Actual: ${typeof dataVal[key]}`);
+      return undefined;
+    }
+  }
+  // Invariant: Validity passed
+  return dataVal as ResourceRow;
+}
 
-    Time Open: ${rr.time_open}
-    Demographic: ${rr.demographic}
-    Resource Type: ${rr.resource_type}
-  `.trim();
+
+
+export function resourceRowToString(rr: ResourceRow) : string {
+  const kvPairs = Object.entries(rr);  // 2-d array of entry kv pairs
+  return kvPairs.map(([key, value]) => {return `${key} : ${value}`}).join();  // Convert arr to string
 }
