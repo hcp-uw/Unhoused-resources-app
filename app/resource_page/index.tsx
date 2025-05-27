@@ -37,9 +37,10 @@ const HeaderBackground = () => (
 
 export default function resource_page() {
   const resourceRows : ResourceRow[] | undefined = useResourceData();
-  const local = useLocalSearchParams();  // for local.resourceRowIndexId to get your specific resourceRow
-  const myRowIndex = (typeof local.resourceRowIndex === 'string') ? (parseInt(local.resourceRowIndex)) : (parseInt(local.resourceRowIndex[0])) ;
-  const row = (resourceRows) ? resourceRows[myRowIndex] : null;
+
+  const local = useLocalSearchParams();  // FOR local.resourceRowId FROM ListBox.tsx param pass
+  const myRowId = (typeof local.resourceRowId === 'string') ? (parseInt(local.resourceRowId)) : (parseInt(local.resourceRowId[0])) ;
+  const row = (resourceRows) ? resourceRows.find((row) => row.id === myRowId) : null;
   const title = row?.title;
 
   const [fontsLoaded] = useFonts({
@@ -53,8 +54,7 @@ export default function resource_page() {
   });
 
   const location = useLocationData();
-  const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') && row?.lat && row?.long 
-      ? getStraightDistanceInKilometers(row?.lat, row?.long, location.coords.latitude, location.coords.longitude) : 'Loading distance...';
+  const dist = getStraightDistanceInKilometers(row?.lat, row?.long, location?.coords.latitude, location?.coords.longitude);
 
   const navigation = useNavigation();
   useEffect(() => {

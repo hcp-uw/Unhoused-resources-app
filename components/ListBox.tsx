@@ -15,7 +15,7 @@ import { router } from 'expo-router';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
 // DEBUG vars
-const debug = true;  // Var to turn on/off debug messages/lines
+const debug = false;  // Var to turn on/off debug messages/lines
 const debugBorders = debug ? { borderWidth: 1, borderColor: 'pink' } : {}
 
 // SIZE vars (more for ease of use/visibility)
@@ -26,10 +26,7 @@ const leftHeaderWidth = 270;
 const rightHeaderWidth = 40;
 const cmnBorderRadius = 7;
 
-
-type ResourceRowPlusIndex = ResourceRow & { index: number }; // Need index passed to give to resource_page for easy access to correct row!
-
-export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic, index }: ResourceRowPlusIndex) {
+export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic }: ResourceRow) {
     // console.log('rating: ' + rating);
     const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
@@ -43,13 +40,12 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
     });
 
     const location = useLocationData();
-    const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') 
-        ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : 'location is loading';
+    const dist = getStraightDistanceInKilometers(lat, long, location?.coords.latitude, location?.coords.longitude);
 
     let type = resource_type;
 
     function doHandleClick(): void {
-        router.navigate(`/resource_page?resourceRowIndex=${index}`);
+        router.navigate(`/resource_page?resourceRowId=${id}`);
     }
 
     return (
@@ -61,7 +57,7 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
                             <Text style={styles.title}>{title}</Text>
                         </View>
             
-                        <View style={[{borderWidth: 0, width: rightHeaderWidth, paddingLeft: 10, alignItems: 'center'}, debugBorders]}>
+                        <View style={[{borderWidth: 0, width: rightHeaderWidth, alignItems: 'center'}, debugBorders]}>
                             <Bookmark/> 
                         </View>
                     </View>
