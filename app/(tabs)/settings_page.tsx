@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native';
-import colors from '../colors'
+import colors from '../../utils/colors'
 import BasicButton from '@/components/BasicButton';
 import { Link, router } from 'expo-router';
 

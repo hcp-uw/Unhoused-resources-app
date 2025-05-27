@@ -1,4 +1,4 @@
-import colors from "@/app/colors";
+import colors from "@/utils/colors";
 import { Animated, Image, ImageSourcePropType, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import PersonBox from "./AboutPerson";
 import BasicButton from "./BasicButton";

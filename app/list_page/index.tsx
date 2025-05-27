@@ -5,20 +5,10 @@ import ListBox from '@/components/ListBox';
 import { useLocalSearchParams, useNavigation } from 'expo-router';  // For SelectButton resource_label
 import { useResourceData } from '../../utils/ResourceContext'
 import { ResourceRow, resourceRowToString } from '@/utils/ResourceRow';
-import colors from '../colors';
+import colors from '../../utils/colors';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 import { LocationObject } from 'expo-location';
-
-const HeaderBackground = () => (
-    <Image
-      source={require('@/assets/images/header_bg.png')}
-      style={{
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-      }}
-    />
-  );
+import HeaderBackground from '@/components/CustomHeader';
 
 export default function list_page() {
     const { resource_label } = useLocalSearchParams();  // Ex. resource_label = Shelter
@@ -36,18 +26,18 @@ export default function list_page() {
     useEffect(() => {
         navigation.setOptions({
           title: resource_label ? String(resource_label) : "Resources",
-          headerStyle: {
-            backgroundColor: colors.darkGreen,
-            height: 150
-          },
+          // WARNING: headerStyle CONFLICTS WITH headerBackground! Dont use
+          // headerStyle: {
+          //   backgroundColor: colors.darkGreen,
+          //   height: 150
+          // },
           headerTintColor: 'white',
           headerTitleStyle: {
             fontWeight: 'bold',
-            fontSize: 28,
+            fontSize: 30,
             fontFamily: 'Roboto-Bold',
           },
           headerBackground: () => <HeaderBackground />,
-          headerShadowVisible: false,
         });
       }, [resource_label]);
     

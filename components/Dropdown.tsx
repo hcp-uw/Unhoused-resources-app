@@ -1,4 +1,4 @@
-import colors from "@/app/colors";
+import colors from "@/utils/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import { Animated, Image, ImageSourcePropType, Pressable, StyleSheet, Text, View } from "react-native";

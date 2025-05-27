@@ -3,11 +3,12 @@ import {ScrollView, View, Text, StyleSheet, Linking} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons' // Popular icons
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import colors from '../colors';
+import colors from '../../utils/colors';
 
 import { Image } from 'expo-image';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
+import HeaderBackground from '@/components/CustomHeader';
 
 export default function TabLayout() {
   const [fontsLoaded] = useFonts({
@@ -33,16 +34,7 @@ export default function TabLayout() {
           //   height: '30%',
           // }, 
           headerBackground: () => (
-            <Image
-              source={require('@/assets/images/header_bg2.png')}
-              style={{
-                width: '100%',
-                height: '100%',
-                // borderColor: 'black',
-                // borderWidth: 2,
-              }}
-              contentFit='fill'
-            />
+            <HeaderBackground/>
           ),
           headerShadowVisible: false,
           headerTintColor: 'white',

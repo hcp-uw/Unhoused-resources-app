@@ -1,4 +1,4 @@
-import colors from "@/app/colors";
+import colors from "@/utils/colors";
 import { Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
 
 type PersonBoxProps = {

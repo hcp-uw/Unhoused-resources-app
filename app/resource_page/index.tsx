@@ -18,22 +18,9 @@ import { useResourceData } from '../../utils/ResourceContext'
 import { ResourceRow, resourceRowToString } from '@/utils/ResourceRow';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
-import colors from '../colors';
+import colors from '../../utils/colors';
 import {useNavigation } from 'expo-router'; 
-
-
-
-const HeaderBackground = () => (
-  <Image
-    source={require('@/assets/images/header_bg.png')}
-    style={{
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-    }}
-  />
-);
-
+import HeaderBackground from '@/components/CustomHeader';
 
 export default function resource_page() {
   const resourceRows : ResourceRow[] | undefined = useResourceData();
@@ -60,17 +47,18 @@ export default function resource_page() {
   useEffect(() => {
     navigation.setOptions({
       title: "Full Details",
-      headerStyle: {
-        backgroundColor: colors.darkGreen,
-        height: 120
-      },
+      // WARNING: headerStyle CONFLICTS WITH headerBackground! Dont use
+      // headerStyle: {
+      //   backgroundColor: colors.darkGreen,
+      //   height: 150
+      // },
       headerTintColor: 'white',
       headerTitleStyle: {
         fontWeight: 'bold',
-        fontSize: 38,
+        fontSize: 30,
         fontFamily: 'Roboto-Bold',
       },
-      headerBackground: () => <HeaderBackground />,
+      headerBackground: () => <HeaderBackground/>,
       headerShadowVisible: false,
     });
   });

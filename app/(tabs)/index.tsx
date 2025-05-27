@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 
-import colors from "../colors";
+import colors from "../../utils/colors";
 import WeatherView from "@/components/WeatherView";
 import SelectButton from "@/components/SelectButton";
 

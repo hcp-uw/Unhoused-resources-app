@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { ResourceProvider } from "../utils/ResourceContext"
 import { LocationProvider } from "@/utils/locationContext";
-import colors from './colors';
+import colors from '../utils/colors';
 // TODO: LEFTOFF: ResourceContext done, need to actually wrap the entire app now and give data!
 
 export default function RootLayout() {

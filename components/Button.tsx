@@ -1,6 +1,6 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import colors from '../app/colors';
+import colors from '../utils/colors';
 // Stack & Link -> Navigation (from expo tutorial)
 import { Stack } from "expo-router";
 import { useRouter } from "expo-router";
