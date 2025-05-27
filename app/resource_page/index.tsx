@@ -103,7 +103,7 @@ export default function resource_page() {
       
 
       <View style={[{marginTop:15}]}>
-        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>Address: 509 10th Ave E, Seattle, WA 98102</Text>
+        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>Address: {row?.address}</Text>
         <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>Demographic: {row?.demographic}</Text>
         <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>{dist} km away</Text>
       </View>
