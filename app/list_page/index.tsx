@@ -17,15 +17,15 @@ export default function list_page() {
     // );
 
     // !!! Console Error: Each child in a list should have a unique "key" prop -> If want to fix, use ResourceRow.id
-
+    const filteredRow = filterResourceRowsFromButton(resourceRows);
     return (
         <ScrollView>
             {/* Feel free to delete things below. Its just to help you see an example of the values & displaying it on screen*/}
-            <Text>Resource_label is {local.resource_label}</Text>
+            {/* <Text>Resource_label is {local.resource_label}</Text> */}
             {/* {resourceRows ? (<Text>{resourceRows[0].id}</Text>) : (<Text> Loading: Fetching resourceRows... </Text>)} */}
 
             {/* NOTE: index != id. Index is made by .map, id is given my supabase retrieved id */}
-            {resourceRows ? (resourceRows.map((row, index) => {return <ListBox key={row.id} {...row} index={index}/>;})) : (<Text key="1"> Loading: ResourceRows is loading or may be null</Text>)}
+            {filteredRow ? (filteredRow.map((row, index) => {return <ListBox key={row.id} {...row} index={index}/>;})) : (<Text key="1"> Loading: ResourceRows is loading or may be null</Text>)}
 
             {/* <ListBox name='King County Homeless Services' type='Housing' dem='Anyone' time='8:00 pm - 8:00 am' dist='3 miles away'/>
             <ListBox name='Capitol Hill Community Lunch' type='Meals' dem='Seniors' time='10:00 am - 3:00 pm' dist='5 miles away'/>
@@ -36,4 +36,19 @@ export default function list_page() {
         </ScrollView>
         
     );
+}
+
+function filterResourceRowsFromButton(resourceRows : ResourceRow[] | undefined) {
+    if (resourceRows === undefined) {
+        console.error("ERROR: resourceRows cannot be filtered as it is undefined");
+        return resourceRows;
+    } else {
+        const local = useLocalSearchParams();  // Ex. resource_label = Shelter
+        if (local.resource_label !== "Hygiene" && local.resource_label !== "Food" && local.resource_label !== "Medical" && local.resource_label !== "Shelter") {
+            console.error("ERROR: passed parameter local.resource_label does not equal ANY resource type given by home page buttons!")
+            return resourceRows;
+        }
+        const filteredRow = resourceRows.filter((row, index) => {return row.resource_type === local.resource_label})
+        return filteredRow;
+    }
 }

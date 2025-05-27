@@ -14,7 +14,7 @@ export default function Index() {
           <Text style={styles.header}>{"What are you\nlooking for?"}</Text>
           <View style={styles.buttonsContainer}>
             <SelectButton label="Hygiene" source={require('../../assets/images/button_hygiene.png')}/>
-            <SelectButton label="Food Banks" source={require('../../assets/images/button_food.png')}/>
+            <SelectButton label="Food" source={require('../../assets/images/button_food.png')}/>
           </View>
           <View style={styles.buttonsContainer}>
             <SelectButton label="Medical" source={require('../../assets/images/button_medical.png')}/>
