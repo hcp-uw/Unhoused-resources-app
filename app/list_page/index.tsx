@@ -38,7 +38,7 @@ export default function list_page() {
           title: resource_label ? String(resource_label) : "Resources",
           headerStyle: {
             backgroundColor: colors.darkGreen,
-            height: 120
+            height: 150
           },
           headerTintColor: 'white',
           headerTitleStyle: {
