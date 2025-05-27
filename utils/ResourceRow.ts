@@ -14,7 +14,7 @@ export type ResourceRow = {
   time_open: string;
   demographic: string;
   resource_type: string;
-  address: string | null,
+  address: string,
 };
 
 // Adding schema map for dynamic/scalable validator update
