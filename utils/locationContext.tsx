@@ -52,7 +52,7 @@ export { LocationProvider, useLocationData };
 // const location = useLocationData(); ERROR: must be used within a provider!!!
 export function getStraightDistanceInKilometers(startLat: number | undefined, startLong: number | undefined, endLat : number | undefined, endLong : number | undefined) : number {
   if (typeof startLat !== "number" || typeof startLong !== "number" || typeof endLat !== "number" || typeof endLong !== "number") {
-    console.error("ERROR: Given latitudes/longitudes in getDistance function are not valid numbers!")
+    console.error("ERROR: Given latitudes/longitudes in getDistance function are not valid numbers!", startLat, startLong, endLat, endLong)
     return -1;
   }
   // console.log("Lat & long", startLat, startLong, endLat, endLong)

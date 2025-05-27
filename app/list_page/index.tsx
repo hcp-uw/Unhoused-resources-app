@@ -4,7 +4,7 @@ import ListBox from '@/components/ListBox';
 
 import { useLocalSearchParams, useNavigation } from 'expo-router';  // For SelectButton resource_label
 import { useResourceData } from '../../utils/ResourceContext'
-import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import { ResourceRow, resourceRowToString } from '@/utils/ResourceRow';
 import colors from '../colors';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 import { LocationObject } from 'expo-location';

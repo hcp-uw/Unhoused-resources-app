@@ -15,7 +15,7 @@ import ReviewBox from '@/components/ReviewBox';
 
 import { Link, useLocalSearchParams } from 'expo-router';  // For SelectButton resource_label
 import { useResourceData } from '../../utils/ResourceContext'
-import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import { ResourceRow, resourceRowToString } from '@/utils/ResourceRow';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
 import colors from '../colors';
@@ -84,7 +84,7 @@ export default function resource_page() {
         <Text style = {[styles.body, {width:30}]}>{row?.rating.toFixed(1)}</Text>
         <ReviewStars s={18} num={rate}/>
       </View>
-      <Text style = {[styles.body, {fontStyle:'italic'}]}>{row?.time_open}</Text>
+      <Text style = {[styles.body, {fontStyle:'italic'}]}>Time open: {row?.time_open}</Text>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style = {[styles.rowContainer, {marginLeft: 14, marginRight: 14}]}>
@@ -103,8 +103,8 @@ export default function resource_page() {
       
 
       <View style={[{marginTop:15}]}>
-        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>509 10th Ave E, Seattle, WA 98102</Text>
-        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>{row?.demographic}</Text>
+        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>Address: 509 10th Ave E, Seattle, WA 98102</Text>
+        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>Demographic: {row?.demographic}</Text>
         <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>{dist} km away</Text>
       </View>
 

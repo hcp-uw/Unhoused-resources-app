@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from './supabase';
 import { Alert } from 'react-native';
-import { ResourceRow, returnValidatedResourceRowArr } from '@/components/ResourceRow';
+import { ResourceRow, returnValidatedResourceRowArr } from '@/utils/ResourceRow';
 
 // createContext(thing) -> value in ResourceContext.Provider is holding
 // a complex custom type (i.e. ResourceRow). It is holding one-time fetch of supabase rows

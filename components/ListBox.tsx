@@ -10,7 +10,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import { ResourceRow, resourceRowToString } from '@/utils/ResourceRow';
 import { router } from 'expo-router';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 

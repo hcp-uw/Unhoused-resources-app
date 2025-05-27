@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import Constants from 'expo-constants'  // process.env STOPS WORKING w/ external libs like react-native-maps
 import { Alert } from 'react-native';
 
-import { ResourceRow, returnValidatedResourceRow, returnValidatedResourceRowArr } from "@/components/ResourceRow";
+import { ResourceRow, returnValidatedResourceRow, returnValidatedResourceRowArr } from "@/utils/ResourceRow";
 
 export default function test_page() {
   // Consts
