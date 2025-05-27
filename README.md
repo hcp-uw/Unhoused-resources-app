@@ -1,5 +1,5 @@
 # Unhoused Resources App - Seattle/King County
-<img src="assets/images/HRALogoLeft.png" width="250">
+<img src="assets/images/Unhoused_Resource_App_Logo.png" width="250">
 
 ## Description
 The Unhoused Resources App aims to help the Unhoused community in the Seattle/King County area
@@ -40,11 +40,11 @@ Once everything is installed properly...
 Note: All authors completed the React Native & Expo tutorial during the project!
 
 * FRONTEND DEVELOPER & UI/UX: **Celestine B.** - celestinembuendia@yahoo.com
-   * Original Figma designer | Home page implementation | Weather Alert API implementation <br>
+   * Original Figma designer | Home/Resource/FAQ/Settings page implementation w/ custom Dropdowns | Weather Alert API implementation <br>
 * UI/UX LEAD & FRONTEND DEVELOPER: **Ian L.** - imlimasi@uw.edu
-   * Proficient Figma designer and leader | List page & Resource page implememtation | Designed our logo <br>
+   * Proficient Figma & Canva designer and leader | List & Resource page + header implementation | Designed & polished Figma, Presentation, & Logo <br>
 * PROJECT MANAGER: **Leonardo P.** - leitoparal36@gmail.com
-   * Weekly meetings, documentation, TODOs | Git branch workflow | Minimal coding unification <br>
+   * Weekly meetings, documentation, TODOs | Git feature branch workflow | Supabase integration w/ Location & ResourceRow Context Providers <br>
 * FULL-STACK (BACKEND) DEVELOPER: **Raahil J.** - rairai77@uw.edu
    * Map Page implementation w/ Google Maps API | Supabase functionality | Proficient at guidance to other members <br>
 
