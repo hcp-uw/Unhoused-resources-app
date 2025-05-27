@@ -5,11 +5,12 @@ import { useFonts } from 'expo-font';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 type Props = {
-    name: string;
-    content: string;
-    uri: string;
+    name: string,
+    content: string,
+    uri: string,
+    rating: number,
 }
-export default function ({name, content, uri} : Props){
+export default function ({name, content, uri, rating} : Props){
     const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
@@ -34,7 +35,7 @@ export default function ({name, content, uri} : Props){
 
             <View style={[styles.rowContainer, {marginLeft:24}, {marginTop:5}]}>
                 <View style={[{marginTop:2}]}>
-                  <ReviewStars s={13}/>
+                  <ReviewStars s={13} num={rating}/>
                 </View>
                 <Text style={[styles.desc, {marginTop:1}]}>1 Week ago</Text>
             </View>
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
       marginLeft: 24,
       width: 40,
       height: 40,
-      borderColor : 'red',
-      borderWidth: 1,
+      // borderColor : 'red',
+      // borderWidth: 1,
       borderRadius: 50,
     },
     desc: {
@@ -63,13 +64,13 @@ const styles = StyleSheet.create({
       fontFamily: 'Roboto-Medium',
       width: 200,
       height: 20,
-      borderColor : 'red',
-      borderWidth: 1,
+      // borderColor : 'red',
+      // borderWidth: 1,
     },
     rowContainer: {
       flexDirection: 'row',
-      borderWidth: 1,
-      borderColor: 'red',
+      // borderWidth: 1,
+      // borderColor: 'red',
     },
     colContainer: {
       flexDirection: 'column',
@@ -84,8 +85,8 @@ const styles = StyleSheet.create({
       opacity: 0.8,
       width: 325,
       height: 200,
-      borderColor : 'red',
-      borderWidth: 1,
+      // borderColor : 'red',
+      // borderWidth: 1,
     },
     header: {
         marginTop: 0,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Bold',
         width: 200,
         height: 20,
-        borderColor : 'red',
-        borderWidth: 1,
+        // borderColor : 'red',
+        // borderWidth: 1,
       },
   });

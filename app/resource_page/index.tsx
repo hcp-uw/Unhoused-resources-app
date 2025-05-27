@@ -1,5 +1,6 @@
-import React from 'react'
-import {ScrollView, View, Text, StyleSheet, Linking} from 'react-native';
+
+import React, { useEffect } from 'react'
+import {ScrollView, View, Text, StyleSheet, Linking, Image} from 'react-native';
 import MapButton from '@/components/MapButton';
 import Ionicons from '@expo/vector-icons/Ionicons' // Popular icons
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
@@ -16,6 +17,23 @@ import { Link, useLocalSearchParams } from 'expo-router';  // For SelectButton r
 import { useResourceData } from '../../utils/ResourceContext'
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
+
+import colors from '../colors';
+import {useNavigation } from 'expo-router'; 
+
+
+
+const HeaderBackground = () => (
+  <Image
+    source={require('@/assets/images/header_bg.png')}
+    style={{
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+    }}
+  />
+);
+
 
 export default function resource_page() {
   const resourceRows : ResourceRow[] | undefined = useResourceData();
@@ -38,14 +56,33 @@ export default function resource_page() {
   const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') && row?.lat && row?.long 
       ? getStraightDistanceInKilometers(row?.lat, row?.long, location.coords.latitude, location.coords.longitude) : 'Loading distance...';
 
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Full Details",
+      headerStyle: {
+        backgroundColor: colors.darkGreen,
+        height: 120
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 38,
+        fontFamily: 'Roboto-Bold',
+      },
+      headerBackground: () => <HeaderBackground />,
+      headerShadowVisible: false,
+    });
+  });
 
+  const rate = row?.rating ? row.rating : 0;
   return (
     <View style={{flex: 1, height: 100}}>
       <ScrollView>
       <Text style = {styles.header}>{title}</Text>
       <View style = {styles.rowContainer}>
-        <Text style = {[styles.body, {width:30}]}>{row?.rating}</Text>
-        <ReviewStars s={18} num={4}/>
+        <Text style = {[styles.body, {width:30}]}>{row?.rating.toFixed(1)}</Text>
+        <ReviewStars s={18} num={rate}/>
       </View>
       <Text style = {[styles.body, {fontStyle:'italic'}]}>{row?.time_open}</Text>
 
@@ -78,7 +115,7 @@ export default function resource_page() {
           <Text style = {[styles.header, {fontSize:27}, {marginTop:0}, {width:45}]}>4.4</Text>
 
           <View style = {[{marginLeft:17}]}>
-            <ReviewStars s={10} num={4}/>
+            <ReviewStars s={10} num={rate}/>
           </View>
 
           <Text style = {[styles.body, {width:30}, {marginLeft:30}, {fontSize:11}]}>(578)</Text>
@@ -97,6 +134,7 @@ export default function resource_page() {
       name="Rendi Weber" 
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       uri={require('@/assets/images/FoodBank1.jpeg')}
+      rating={rate}
       />
 
       </ScrollView>
@@ -114,8 +152,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     fontWeight: 'bold',
     width: 292,
-    borderColor : 'red',
-    borderWidth: 1,
+    // borderColor : 'red',
+    // borderWidth: 1,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -131,7 +169,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
     fontWeight: 'bold',
     width: 350,
-    borderColor : 'red',
-    borderWidth: 1,
+    // borderColor : 'red',
+    // borderWidth: 1,
   },
 });

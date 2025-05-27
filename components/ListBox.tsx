@@ -24,6 +24,7 @@ import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locati
 type ResourceRowPlusIndex = ResourceRow & { index: number }; // Need index passed to give to resource_page for easy access to correct row!
 
 export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic, index }: ResourceRowPlusIndex) {
+    // console.log('rating: ' + rating);
     const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
@@ -117,8 +118,8 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: '#37637C',
         width: 360,
-        height: 50,
-        marginBottom: 10,
+        height: 57,
+        marginBottom: 0,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         justifyContent: 'center',
@@ -135,8 +136,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-BoldItalic',
         marginLeft: 18,
         marginBottom: 3,
-        borderColor: 'pink',
-        borderWidth: 1,
+        // borderColor: 'pink',
+        // borderWidth: 1,
     },
     rowContainer: {
         flexDirection: 'row',

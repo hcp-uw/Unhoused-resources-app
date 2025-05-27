@@ -83,9 +83,9 @@ export default function WeatherView() {
     }
     try {
       const response = await fetch('http://api.weatherapi.com/v1/alerts.json?key=0b50c9222bd8438ea0d232922252402&q=' 
-          // + '71282' );  // location for testing
-          + location.coords.latitude + ','
-          + location.coords.longitude );
+          + '77320' );  // location for testing
+          // + location.coords.latitude + ','
+          // + location.coords.longitude );
       const json = await response.json();
       setAlerts(json.alerts.alert);
     } catch (e) {
