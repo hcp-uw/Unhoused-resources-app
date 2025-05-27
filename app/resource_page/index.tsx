@@ -1,5 +1,5 @@
 import React from 'react'
-import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, Linking} from 'react-native';
 import MapButton from '@/components/MapButton';
 import Ionicons from '@expo/vector-icons/Ionicons' // Popular icons
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
@@ -12,9 +12,10 @@ import ReviewBar from '@/components/ReviewBar';
 import ReviewStars from '@/components/ReviewStars';
 import ReviewBox from '@/components/ReviewBox';
 
-import { useLocalSearchParams } from 'expo-router';  // For SelectButton resource_label
+import { Link, useLocalSearchParams } from 'expo-router';  // For SelectButton resource_label
 import { useResourceData } from '../../utils/ResourceContext'
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
 export default function resource_page() {
   const resourceRows : ResourceRow[] | undefined = useResourceData();
@@ -33,6 +34,9 @@ export default function resource_page() {
     "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
   });
 
+  const location = useLocationData();
+  const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') && row?.lat && row?.long 
+      ? getStraightDistanceInKilometers(row?.lat, row?.long, location.coords.latitude, location.coords.longitude) : 'Loading distance...';
 
 
   return (
@@ -43,14 +47,14 @@ export default function resource_page() {
         <Text style = {[styles.body, {width:30}]}>{row?.rating}</Text>
         <ReviewStars s={18} num={4}/>
       </View>
-      <Text style = {[styles.body, {fontStyle:'italic'}]}>10:00 AM - 3:00 PM</Text>
+      <Text style = {[styles.body, {fontStyle:'italic'}]}>{row?.time_open}</Text>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style = {[styles.rowContainer, {marginLeft: 14}]}>
-          <MapButton texts="Directions" icon="directions"/>
-          <MapButton texts="Call  " icon="directions"/>
-          <MapButton texts="Save  " icon="directions"/>
-          <MapButton texts="Website" icon="directions"/>
+        <View style = {[styles.rowContainer, {marginLeft: 14, marginRight: 14}]}>
+          <MapButton texts="Directions" icon="directions" onClick={() => row?.maps_url ? Linking.openURL(row?.maps_url) : alert('No directions available')}/>
+          <MapButton texts="Call  " icon="phone-alt" onClick={() => Linking.openURL('tel:' + row?.phone)}/>
+          <MapButton texts="Save  " icon="bookmark" onClick={() => alert('Bookmark function not available')}/>
+          <MapButton texts="Website" icon="external-link-alt" onClick={() => row?.website ? Linking.openURL(row?.website) : alert('No website available')}/>
         </View>
       </ScrollView>
 
@@ -63,15 +67,15 @@ export default function resource_page() {
 
       <View style={[{marginTop:15}]}>
         <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>509 10th Ave E, Seattle, WA 98102</Text>
-        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>Seniors (65+)</Text>
-        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>5 miles away</Text>
+        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>{row?.demographic}</Text>
+        <Text style = {[styles.body, {width:300}, {marginBottom:10}]}>{dist} km away</Text>
       </View>
 
       <Text style = {[styles.header, {fontSize:20}]}>Review Summary</Text>
 
       <View style = {styles.rowContainer}>
         <View style = {styles.colContainer}>
-          <Text style = {[styles.header, {fontSize:27}, {marginTop:0}, {width:40}]}>4,4</Text>
+          <Text style = {[styles.header, {fontSize:27}, {marginTop:0}, {width:45}]}>4.4</Text>
 
           <View style = {[{marginLeft:17}]}>
             <ReviewStars s={10} num={4}/>

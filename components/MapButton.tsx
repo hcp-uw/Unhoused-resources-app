@@ -8,8 +8,9 @@ import { useFonts } from 'expo-font';
 type Props = {
     texts: string;
     icon: string;
+    onClick: () => void;
 }
-export default function MapButton ({texts, icon}: Props) {
+export default function MapButton ({texts, icon, onClick}: Props) {
     const[textWidth, settextWidth] = useState(0);
       const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
@@ -21,7 +22,7 @@ export default function MapButton ({texts, icon}: Props) {
       });
 
     return(
-    <Pressable style={[styles.box, {width: texts.length*13}]} onPress={(texts==='Website') ? doWebsiteClick : () => alert('')}>
+    <Pressable style={[styles.box, {width: texts.length*13}]} onPress={onClick}>
         <FontAwesome5 name={icon} color='#fff' size={16} marginLeft={10}/>
         <Text style={[styles.text, {width:texts.length*9}]}>{texts}</Text>
     </Pressable>
