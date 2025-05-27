@@ -24,7 +24,7 @@ export default function MapButton ({texts, icon, onClick}: Props) {
     return(
     <Pressable style={[styles.box, {width: texts.length*13}]} onPress={onClick}>
         <FontAwesome5 name={icon} color='#fff' size={16} marginLeft={10}/>
-        <Text style={[styles.text, {width:texts.length*9}]}>{texts}</Text>
+        <Text style={[styles.text, {width:texts.length*8.5}]}>{texts}</Text>
     </Pressable>
     )
 }
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         // fontWeight: 'bold',
         textAlign: 'center',
-        borderColor : 'red',
-        borderWidth: 1,
+        // borderColor : 'red',
+        // borderWidth: 1,
         width: 1,
         //marginLeft: 4,
     },

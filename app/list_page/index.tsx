@@ -1,15 +1,28 @@
-import React from 'react'
-import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import React, { useEffect } from 'react'
+import {ScrollView, View, Text, Image, StyleSheet} from 'react-native';
 import ListBox from '@/components/ListBox';
 
-import { useLocalSearchParams } from 'expo-router';  // For SelectButton resource_label
+import { useLocalSearchParams, useNavigation } from 'expo-router';  // For SelectButton resource_label
 import { useResourceData } from '../../utils/ResourceContext'
 import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import colors from '../colors';
+
+const HeaderBackground = () => (
+    <Image
+      source={require('@/assets/images/header_bg.png')}
+      style={{
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+      }}
+    />
+  );
 
 export default function list_page() {
-    const local = useLocalSearchParams();  // Ex. resource_label = Shelter
+    const { resource_label } = useLocalSearchParams();  // Ex. resource_label = Shelter
+    const navigation = useNavigation();
     const resourceRows : ResourceRow[] | undefined = useResourceData();
-    console.log("PASSED FROM HOME_PAGE: local.resource_label: ", local.resource_label);
+    // console.log("PASSED FROM HOME_PAGE: local.resource_label: ", resource_label);
 
     // Example: filter resource list based on category
     // const filteredResources = ALL_RESOURCES.filter(
@@ -17,7 +30,27 @@ export default function list_page() {
     // );
 
     // !!! Console Error: Each child in a list should have a unique "key" prop -> If want to fix, use ResourceRow.id
+  
     const filteredRow = filterResourceRowsFromButton(resourceRows);
+
+    useEffect(() => {
+        navigation.setOptions({
+          title: resource_label ? String(resource_label) : "Resources",
+          headerStyle: {
+            backgroundColor: colors.darkGreen,
+            height: 120
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 38,
+            fontFamily: 'Roboto-Bold',
+          },
+          headerBackground: () => <HeaderBackground />,
+          headerShadowVisible: false,
+        });
+      }, [resource_label]);
+    
     return (
         <ScrollView>
             {/* Feel free to delete things below. Its just to help you see an example of the values & displaying it on screen*/}

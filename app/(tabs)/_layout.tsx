@@ -1,26 +1,61 @@
 import { Tabs } from 'expo-router';
+import {ScrollView, View, Text, StyleSheet, Linking} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons' // Popular icons
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import colors from '../colors'
+import colors from '../colors';
+
+import { Image } from 'expo-image';
+import { useFonts } from 'expo-font';
 
 export default function TabLayout() {
+    const [fontsLoaded] = useFonts({
+      "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
+      "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
+      "Roboto_Condensed-ExtraBold": require("@/assets/fonts/Roboto_Condensed-ExtraBold.ttf"),
+      "Roboto-Bold": require("@/assets/fonts/Roboto-Bold.ttf"),
+      "Roboto-BoldItalic": require("@/assets/fonts/Roboto-BoldItalic.ttf"),
+      "Roboto-Medium": require("@/assets/fonts/Roboto-Medium.ttf"),
+      "Roboto-MediumItalic": require("@/assets/fonts/Roboto-MediumItalic.ttf"),
+    });
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'yellow',
+        tabBarActiveTintColor: '#EFBC06',
         headerStyle: {
-          backgroundColor: colors.darkGreen,
+          height: 170,
         },
+        headerBackground: () => (
+          <Image
+            source={require('@/assets/images/header_bg.png')}
+            style={{
+              width: '100%',
+              height: '100%',
+              // borderColor: 'black',
+              // borderWidth: 2,
+            }}
+          />
+        ),
         headerShadowVisible: false,
         headerTintColor: 'white',
         tabBarStyle: {
           backgroundColor: colors.darkGreen,
         },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 38,
+          fontFamily: 'Roboto-Bold'
+        },
       }}
     >
       <Tabs.Screen name="index" options={{ 
-        title: 'Home',
+        tabBarLabel: 'Home',  
+        headerTitle: () => (
+          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 38, textAlign: 'center', marginTop: 35 }}>
+          UNHOUSED{'\n'}  RESOURCES
+          </Text>
+        ),
         tabBarIcon: ({ color, focused }) => (
           <Ionicons name='home-sharp' color={color} size={24} />
         ),
