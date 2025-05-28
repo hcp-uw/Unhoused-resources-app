@@ -1,6 +1,6 @@
 import { StyleSheet, View, Pressable, Text, Image, ImageSourcePropType } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import colors from '../app/colors';
+import colors from '../utils/colors';
 import { router } from 'expo-router';
 
 type Props = {

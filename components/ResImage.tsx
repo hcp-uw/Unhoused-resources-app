@@ -25,23 +25,23 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         flexDirection: 'row',
 
-        borderColor : 'pink',
-        borderWidth: 2,
+        // borderColor : 'pink',
+        // borderWidth: 2,
       },
     colContainer: {
         marginLeft: 10,
         marginRight: 10,
         flexDirection: 'column',
 
-        borderColor : 'pink',
-        borderWidth: 2,
+        // borderColor : 'pink',
+        // borderWidth: 2,
     },
     img : {
         width: 240,
         height: 282,
         borderRadius: 21,
 
-        borderColor : 'lightblue',
-        borderWidth: 3,
+        // borderColor : 'lightblue',
+        // borderWidth: 3,
     }
 });

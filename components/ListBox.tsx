@@ -10,20 +10,24 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-import { ResourceRow, resourceRowToString } from '@/components/ResourceRow';
+import { ResourceRow, resourceRowToString } from '@/utils/ResourceRow';
 import { router } from 'expo-router';
 import { getStraightDistanceInKilometers, useLocationData } from '@/utils/locationContext';
 
-// type Props = {
-//     name: String,
-//     type: String,
-//     dem: String,
-//     time: String,
-//     dist: String,
-// }
-type ResourceRowPlusIndex = ResourceRow & { index: number }; // Need index passed to give to resource_page for easy access to correct row!
+// DEBUG vars
+const debug = false;  // Var to turn on/off debug messages/lines
+const debugBorders = debug ? { borderWidth: 1, borderColor: 'pink' } : {}
 
-export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic, index }: ResourceRowPlusIndex) {
+// SIZE vars (more for ease of use/visibility)
+const boxWidth = 270+40;
+const boxHeight = 190;
+const boxMargins = 25;
+const leftHeaderWidth = 270;
+const rightHeaderWidth = 40;
+const cmnBorderRadius = 7;
+
+export default function ListBox({ id, title, rating, lat, long, resource_type, time_open, demographic }: ResourceRow) {
+    // console.log('rating: ' + rating);
     const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("@/assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("@/assets/fonts/Roboto-Italic.ttf"),
@@ -36,33 +40,31 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
     });
 
     const location = useLocationData();
-    const dist = (typeof location?.coords.latitude === 'number' && typeof location?.coords.longitude === 'number') 
-        ? getStraightDistanceInKilometers(lat, long, location.coords.latitude, location.coords.longitude) : 'location is loading';
+    const dist = getStraightDistanceInKilometers(lat, long, location?.coords.latitude, location?.coords.longitude);
 
     let type = resource_type;
 
     function doHandleClick(): void {
-        router.navigate(`/resource_page?resourceRowIndex=${index}`);
+        router.navigate(`/resource_page?resourceRowId=${id}`);
     }
 
     return (
         <Pressable onPress={doHandleClick}>
             <View style={styles.box}>
                 <View style={styles.header}>
-                    <View style={styles.rowContainer}>
-                        <View style={{borderWidth: 0, width: 320, justifyContent:'center'}}>
+                    <View style={[styles.rowContainer, debugBorders]}>
+                        <View style={[{borderWidth: 0, width: leftHeaderWidth, justifyContent:'center'}, debugBorders]}>
                             <Text style={styles.title}>{title}</Text>
                         </View>
             
-                        <View style={{borderWidth: 0, marginLeft: 0}}>
-                            <Bookmark/>
+                        <View style={[{borderWidth: 0, width: rightHeaderWidth, alignItems: 'center'}, debugBorders]}>
+                            <Bookmark/> 
                         </View>
-            
                     </View>
-            
                 </View>
+
                 <View style={styles.rowContainer}>
-                    <View style={styles.bodyBox}>
+                    <View style={[styles.bodyBox, debugBorders]}>
                         <View style={styles.rowContainer}>
                         <AntDesign name="questioncircle" size={20} color="#37637C" marginLeft={2}/>
                             <Text style={styles.body}>{type}</Text>
@@ -83,26 +85,28 @@ export default function ListBox({ id, title, rating, lat, long, resource_type, t
                     <View style={styles.starBox}>
                         <ReviewStars s={16} num={rating}></ReviewStars>
                     </View>
-            
                 </View>
+
             </View>
         </Pressable>
     );
 }
 
 const styles = StyleSheet.create({
+    // BOX: has fixed Density-independent pixel size (!WARNING! ListBox inside Scrollview! %percent heights discouraged!)
+    // INSIDE BOX: should use percentages?
     box: {
         backgroundColor: '#E1E1E1',
-        width: 360,
-        height: 180,
-        borderRadius: 7,
-        marginLeft: 17,
-        marginTop: 24,
+        width: boxWidth,
+        height: boxHeight,
+        borderRadius: cmnBorderRadius,
+        marginLeft: boxMargins,
+        marginTop: boxMargins,
+        borderColor: (debug) ? ('orange') : (undefined),
+        borderWidth: (debug) ? (1) : (0)
     },
     bodyBox: {
-        // borderColor: 'red',
-        // borderWidth: 1,
-        width: 245,
+        width: 200,
         height: 130,
         justifyContent: 'center',
         marginLeft: 12,
@@ -116,11 +120,11 @@ const styles = StyleSheet.create({
     },
     header: {
         backgroundColor: '#37637C',
-        width: 360,
-        height: 50,
-        marginBottom: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        width: '100%',
+        height: 57,
+        marginBottom: 0,
+        borderTopLeftRadius: cmnBorderRadius,
+        borderTopRightRadius: cmnBorderRadius,
         justifyContent: 'center',
     },
     title: {
@@ -135,13 +139,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-BoldItalic',
         marginLeft: 18,
         marginBottom: 3,
-        borderColor: 'pink',
-        borderWidth: 1,
+        // borderColor: 'pink',
+        // borderWidth: 1,
     },
     rowContainer: {
         flexDirection: 'row',
-        // borderWidth: 1,
-        // borderColor: 'red',
+        borderWidth: (debug) ? (1) : (0),
+        borderColor: (debug) ? ('yellow') : (undefined),
     },
     colContainer: {
         flexDirection: 'column',
