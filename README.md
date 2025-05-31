@@ -1,7 +1,9 @@
 # Unhoused Resources App - Seattle/King County
 <img src="assets/images/Unhoused_Resource_App_Logo.png" width="250">
 <br>
-* [![URA May 2025 MVP Demo](https://img.youtube.com/vi/HUvWatugRcQ/0.jpg)](https://www.youtube.com/watch?v=HUvWatugRcQ)
+<a href="https://www.youtube.com/watch?v=HUvWatugRcQ" 
+  target="_blank"><img src="http://img.youtube.com/vi/HUvWatugRcQ/0.jpg" 
+  alt="URA May 2025 MVP Demo" width="240" height="180" border="10" /></a>
 
 ## Description
 The Unhoused Resources App aims to help the Unhoused community in the Seattle/King County area
