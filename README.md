@@ -2,6 +2,7 @@
 <img src="assets/images/Unhoused_Resource_App_Logo.png" width="250">
 
 ## Youtube Video Demo
+<h2>Click Me!</h2>
 <a href="https://www.youtube.com/watch?v=HUvWatugRcQ" 
   target="_blank"><img src="http://img.youtube.com/vi/HUvWatugRcQ/0.jpg" 
   alt="URA May 2025 MVP Demo" width="500" height="300" border="10" /></a>
