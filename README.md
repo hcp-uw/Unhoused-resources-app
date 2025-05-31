@@ -48,11 +48,6 @@ Note: All authors completed the React Native & Expo tutorial during the project!
 * FULL-STACK (BACKEND) DEVELOPER: **Raahil J.** - rairai77@uw.edu
    * Map Page implementation w/ Google Maps API | Supabase functionality | Proficient at guidance to other members <br>
 
-* FRONTEND DEVELOPER: **Jong-Hyun** - jonghyunleecs@gmail.com
-   * Helpers Page implementation <br>
-* FRONTEND DEVELOPER : **Thang H.** - thuynh6@uw.edu
-   * tbd <br>
-
 ## License
 Creative Commons License - From the Husky Coding Project
 
